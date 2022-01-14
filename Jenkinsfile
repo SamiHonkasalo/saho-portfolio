@@ -7,7 +7,7 @@ pipeline{
 		stage('Build') {
             steps {
                 sh '''
-                    docker build --target production -t $image:latest
+                    docker build --target production -t $image:latest .
                 '''
             }
 		}
