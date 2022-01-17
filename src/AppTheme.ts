@@ -3,6 +3,9 @@ import { createTheme } from "@mui/material";
 export const AppTheme = createTheme({
   palette: {
     mode: "dark",
+    background: {
+      paper: "#2A292C",
+    },
   },
   typography: {
     fontFamily: "Ubuntu, Helvetica, Arial, sans-serif",

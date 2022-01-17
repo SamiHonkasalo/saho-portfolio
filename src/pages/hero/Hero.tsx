@@ -1,6 +1,7 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import heroImage from "~/assets/hero-image.png";
-import { HeaderOffset } from "~/Layout/HeaderOffset";
+import { HeaderOffset } from "~/layout/HeaderOffset";
+import { HeroCard } from "~/pages/hero/HeroCard";
 
 export const Hero = (): JSX.Element => {
   return (
@@ -15,10 +16,8 @@ export const Hero = (): JSX.Element => {
         <Grid item xs={12}>
           <HeaderOffset />
         </Grid>
-        <Grid item xs={6}>
-          <Typography variant="h4">
-            Samin portfolio (Work In Progress)
-          </Typography>
+        <Grid item xs={11} sm={10} md={9} lg={8} xl={6} sx={{ mt: 4 }}>
+          <HeroCard />
         </Grid>
       </Grid>
     </Box>

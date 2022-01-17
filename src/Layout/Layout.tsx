@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
-import { Header } from "~/Layout/Header";
-import { About } from "~/Pages/About";
-import { Hero } from "~/Pages/Hero";
+import { Header } from "~/layout/Header";
+import { About } from "~/pages/about/About";
+import { Hero } from "~/pages/hero/Hero";
 
 export function Layout(): JSX.Element {
   return (

@@ -1,0 +1,37 @@
+{
+  "Hook": {
+    "prefix": "hook",
+    "body": [
+      "",
+      "export const $TM_FILENAME_BASE = (): JSX.Element => {",
+      "\t$0",
+      "\treturn ${1:<></>}",
+      "}"
+    ],
+    "description": "Simple react hook"
+  },
+  "Hook with props": {
+    "prefix": "hook:props",
+    "body": [
+      "type Props = {",
+      "",
+      "}",
+      "",
+      "export const $TM_FILENAME_BASE = ({}: Props): JSX.Element => {",
+      "\t$0",
+      "\treturn ${1:<></>}",
+      "}"
+    ],
+    "description": "Simple react hook with props"
+  },
+  "useEffect log": {
+    "prefix": "uel",
+    "body": [
+      "React.useEffect(() => {",
+      "\tconsole.log($1);",
+      "}, [$1]);",
+      "$0"
+    ],
+    "description": "useStyles hook"
+  }
+}
