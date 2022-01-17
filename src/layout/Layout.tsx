@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { Header } from "~/Layout/Header";
+import { Header } from "~/layout/Header";
 import { About } from "~/pages/about/About";
 import { Hero } from "~/pages/hero/Hero";
 

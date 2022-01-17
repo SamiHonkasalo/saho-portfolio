@@ -1,6 +1,6 @@
 import { Box, Grid } from "@mui/material";
 import heroImage from "~/assets/hero-image.png";
-import { HeaderOffset } from "~/Layout/HeaderOffset";
+import { HeaderOffset } from "~/layout/HeaderOffset";
 import { HeroCard } from "~/pages/hero/HeroCard";
 
 export const Hero = (): JSX.Element => {
