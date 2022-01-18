@@ -31,7 +31,7 @@ export const Header = (): JSX.Element => {
               sx={{
                 fontWeight: (theme) => theme.typography.fontWeightBold,
                 fontSize: (theme) => theme.typography.pxToRem(24),
-                lineHeight: 1.2,
+                lineHeight: 1.3,
               }}
             >
               Sami Honkasalo
