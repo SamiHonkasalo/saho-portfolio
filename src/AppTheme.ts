@@ -4,6 +4,7 @@ export const AppTheme = createTheme({
   palette: {
     mode: "dark",
     background: {
+      default: "#EEEEEE",
       paper: "#2A292C",
     },
   },
