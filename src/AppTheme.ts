@@ -7,6 +7,10 @@ export const AppTheme = createTheme({
       default: "#EEEEEE",
       paper: "#2A292C",
     },
+    common: {
+      white: "#F9F9F9",
+      black: "#2A292C",
+    },
   },
   typography: {
     fontFamily: "Ubuntu, Helvetica, Arial, sans-serif",

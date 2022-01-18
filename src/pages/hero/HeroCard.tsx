@@ -20,14 +20,14 @@ const TransitionVariants: Variants = {
     },
   },
   cardSlideOff: {
-    x: -100,
+    x: -50,
   },
   cardSlideOn: {
     x: 0,
     transition: {
       type: "spring",
       bounce: 0.3,
-      duration: 0.8,
+      duration: 1.5,
     },
   },
 };
@@ -45,6 +45,7 @@ export const HeroCard = (): JSX.Element => {
       initial="cardSlideOff"
       whileInView="cardSlideOn"
       viewport={{ once: true }}
+      layout
     >
       <Card
         sx={{
