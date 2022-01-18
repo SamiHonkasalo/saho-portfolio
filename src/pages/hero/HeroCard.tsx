@@ -1,8 +1,36 @@
 import { Box, Card, Grid, Paper, Typography } from "@mui/material";
+import { motion, Variants } from "framer-motion";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import avatarImage from "~/assets/avatar-image.png";
 import { useIsMobile } from "~/utils/useIsMobile";
+
+const { div: MotionDiv } = motion;
+
+const TransitionVariants: Variants = {
+  offScreen: {
+    opacity: 0,
+  },
+  onScreen: {
+    opacity: 1,
+    transition: {
+      type: "spring",
+      bounce: 0.4,
+      duration: 1.2,
+    },
+  },
+  cardSlideOff: {
+    x: -100,
+  },
+  cardSlideOn: {
+    x: 0,
+    transition: {
+      type: "spring",
+      bounce: 0.3,
+      duration: 0.8,
+    },
+  },
+};
 
 export const HeroCard = (): JSX.Element => {
   const isMobile = useIsMobile();
@@ -10,18 +38,26 @@ export const HeroCard = (): JSX.Element => {
     () => (isMobile ? <HeroCardMobile /> : <HeroCardDesktop />),
     [isMobile],
   );
+
   return (
-    <Card
-      sx={{
-        mixBlendMode: "normal",
-        backdropFilter: `blur(${10}px)`,
-        backgroundColor: "rgba(228, 226, 226, 0.0)",
-        p: 4,
-        pr: isMobile ? 4 : 1,
-      }}
+    <MotionDiv
+      variants={TransitionVariants}
+      initial="cardSlideOff"
+      whileInView="cardSlideOn"
+      viewport={{ once: true }}
     >
-      {cardContent}
-    </Card>
+      <Card
+        sx={{
+          mixBlendMode: "normal",
+          backdropFilter: `blur(${10}px)`,
+          backgroundColor: "rgba(228, 226, 226, 0.0)",
+          p: 4,
+          pr: isMobile ? 4 : 1,
+        }}
+      >
+        {cardContent}
+      </Card>
+    </MotionDiv>
   );
 };
 
@@ -101,9 +137,16 @@ function HeroCardTitle() {
 function HeroCardText() {
   const { t } = useTranslation("hero");
   return (
-    <Typography variant="body2" whiteSpace="pre-line">
-      {t("card-content")}
-    </Typography>
+    <MotionDiv
+      variants={TransitionVariants}
+      initial="offScreen"
+      whileInView="onScreen"
+      viewport={{ once: true }}
+    >
+      <Typography variant="body2" whiteSpace="pre-line">
+        {t("card-content")}
+      </Typography>
+    </MotionDiv>
   );
 }
 
