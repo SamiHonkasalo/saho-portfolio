@@ -31,6 +31,9 @@ const SectionVariants: Variants = {
   on: {
     opacity: 1,
     y: 0,
+    transition: {
+      duration: 0.4,
+    },
   },
 };
 

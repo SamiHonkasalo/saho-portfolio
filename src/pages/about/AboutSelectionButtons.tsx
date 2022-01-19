@@ -1,9 +1,10 @@
-import { Button, Card, Grid, useTheme } from "@mui/material";
+import { Box, Button, Card, Grid, useTheme } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import {
   AboutPageSectionKey,
   AboutPageSectionKeys,
+  AboutPageSections,
   ABOUT_CONTENT_HEIGHT,
 } from "./AboutCards";
 
@@ -22,6 +23,9 @@ export const AboutSelectionButtons = ({
       sx={{
         backgroundColor: (theme) => theme.palette.common.white,
         height: ABOUT_CONTENT_HEIGHT,
+        position: "relative",
+        overflow: "visible",
+        marginTop: 3,
       }}
     >
       <Grid container spacing={3} sx={{ pt: 5 }}>
@@ -35,6 +39,7 @@ export const AboutSelectionButtons = ({
           />
         ))}
       </Grid>
+      <ActiveSelectionIndicator activeSelection={activeSectionKey} />
     </Card>
   );
 };
@@ -85,4 +90,47 @@ function AboutSelectionButton({
       </Button>
     </Grid>
   );
+}
+
+type ActiveSelectionIndicatorProps = {
+  activeSelection: AboutPageSectionKey;
+};
+
+function ActiveSelectionIndicator({
+  activeSelection,
+}: ActiveSelectionIndicatorProps): JSX.Element {
+  const theme = useTheme();
+  const height = 75;
+  const width = theme.spacing(3);
+  const widthNumber = Number.parseInt(width.replace("px", ""), 10);
+  const buttonHeight = 54;
+  const buttonSpacing = Number.parseInt(theme.spacing(3).replace("px", ""), 10);
+  const heightDiff = height - buttonHeight;
+  const transitionDuration = `${0.3}s`;
+  const { order } = AboutPageSections[activeSelection];
+  const translateY = (order - 1) * (buttonHeight + buttonSpacing);
+  return (
+    <Box
+      sx={{
+        backgroundColor: theme.palette.common.white,
+        width,
+        height,
+        position: "absolute",
+        top: `calc(${theme.spacing(3)} + ${theme.spacing(5)} - ${
+          heightDiff / 2
+        }px)`,
+        left: "100%",
+        clipPath: `path('${generateClipPath(widthNumber, height)}')`,
+        transition: `transform ${transitionDuration} ease-in-out`,
+        transform: `translateY(${translateY}px)`,
+      }}
+    />
+  );
+}
+
+function generateClipPath(width: number, height: number): string {
+  const quart = height / 4;
+  return `M0 ${0} C ${width} ${quart}, ${width} ${quart}, ${width} ${
+    quart * 2
+  }, ${width} ${quart * 3}, ${0} ${quart * 3}, ${0} ${quart * 4}`;
 }
