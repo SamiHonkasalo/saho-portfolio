@@ -223,15 +223,17 @@ function AboutListItem({
           }
           secondary={
             <>
-              <Typography
-                component={isMobile ? "p" : "span"}
-                sx={{
-                  mr: 2,
-                  color: (theme) => theme.palette.grey[600],
-                }}
-              >
-                {secondary}
-              </Typography>
+              {secondary ? (
+                <Typography
+                  component={isMobile ? "p" : "span"}
+                  sx={{
+                    mr: 2,
+                    color: (theme) => theme.palette.grey[600],
+                  }}
+                >
+                  {secondary}
+                </Typography>
+              ) : null}
               {ternary}
             </>
           }
