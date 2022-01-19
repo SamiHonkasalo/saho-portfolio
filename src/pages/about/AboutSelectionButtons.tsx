@@ -1,4 +1,17 @@
-import { Box, Button, Card, Grid, useTheme } from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import BusinessIcon from "@mui/icons-material/Business";
+import SchoolIcon from "@mui/icons-material/School";
+import {
+  Box,
+  Button,
+  Card,
+  Grid,
+  IconButton,
+  Tooltip,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import { motion } from "framer-motion";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -7,6 +20,8 @@ import {
   AboutPageSections,
   ABOUT_CONTENT_HEIGHT,
 } from "./AboutCards";
+
+const { div: MotionDiv } = motion;
 
 type Props = {
   activeSectionKey: AboutPageSectionKey;
@@ -88,6 +103,92 @@ function AboutSelectionButton({
       >
         {label}
       </Button>
+    </Grid>
+  );
+}
+
+export const AboutSelectionButtonsMobile = ({
+  activeSectionKey,
+  onButtonClick,
+}: Props): JSX.Element => {
+  const { t } = useTranslation("about");
+  return (
+    <Grid container spacing={1} sx={{ mb: 2 }} justifyContent="center">
+      {AboutPageSectionKeys.map((section) => (
+        <AboutSelectionButtonMobile
+          key={section}
+          section={section}
+          label={t(section)}
+          active={activeSectionKey === section}
+          onClick={onButtonClick}
+        />
+      ))}
+    </Grid>
+  );
+};
+
+function AboutSelectionButtonMobile({
+  label,
+  active,
+  section,
+  onClick,
+}: AboutSelectionButtonProps): JSX.Element {
+  const handleClick = React.useCallback(
+    () => onClick(section),
+    [section, onClick],
+  );
+  const icon = React.useMemo(() => {
+    switch (section) {
+      case "me":
+        return <AccountCircleIcon fontSize="large" />;
+      case "experience":
+        return <BusinessIcon fontSize="large" />;
+      case "education":
+        return <SchoolIcon fontSize="large" />;
+
+      default:
+        return null;
+    }
+  }, [section]);
+
+  return (
+    <Grid container item xs={4} alignContent="center" flexDirection="column">
+      <Grid
+        item
+        sx={{ display: "flex", justifyContent: "center", minWidth: 90 }}
+      >
+        <Tooltip title={label}>
+          <IconButton
+            onClick={handleClick}
+            sx={{
+              transform: `scale(${active ? 1.4 : 1})`,
+              transition: `transform 0.3s ease-in-out`,
+              color: (theme) => theme.palette.common.black,
+            }}
+          >
+            {icon}
+          </IconButton>
+        </Tooltip>
+      </Grid>
+      {active ? (
+        <MotionDiv
+          animate={{ y: 0, opacity: 1 }}
+          initial={{ y: 20, opacity: 0 }}
+        >
+          <Grid item>
+            <Typography
+              variant="body2"
+              textAlign="center"
+              sx={{
+                color: (theme) => theme.palette.common.black,
+                fontWeight: (theme) => theme.typography.fontWeightBold,
+              }}
+            >
+              {label}
+            </Typography>
+          </Grid>
+        </MotionDiv>
+      ) : null}
     </Grid>
   );
 }

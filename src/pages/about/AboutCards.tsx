@@ -1,7 +1,11 @@
 import { Grid } from "@mui/material";
 import { motion, Variants } from "framer-motion";
 import React from "react";
-import { AboutSelectionButtons } from "./AboutSelectionButtons";
+import { useIsMobile } from "~/utils/useIsMobile";
+import {
+  AboutSelectionButtons,
+  AboutSelectionButtonsMobile,
+} from "./AboutSelectionButtons";
 import { AboutSelectionContent } from "./AboutSelectionContent";
 
 const { div: MotionDiv } = motion;
@@ -34,7 +38,9 @@ const TransitionVariants: Variants = {
 };
 export const AboutCards = (): JSX.Element => {
   const [activeSectionKey, setActiveSectionKey] =
-    React.useState<AboutPageSectionKey>("experience");
+    React.useState<AboutPageSectionKey>("me");
+
+  const isMobile = useIsMobile();
 
   return (
     <MotionDiv
@@ -44,13 +50,21 @@ export const AboutCards = (): JSX.Element => {
       viewport={{ once: true }}
     >
       <Grid container spacing={3} justifyContent="center" sx={{ mt: 8 }}>
-        <Grid item xl={2} lg={3} md={4} sm={5} xs={8}>
-          <AboutSelectionButtons
-            activeSectionKey={activeSectionKey}
-            onButtonClick={setActiveSectionKey}
-          />
-        </Grid>
-        <Grid item xl={4} lg={5} md={6} sm={6} xs={8}>
+        {isMobile ? null : (
+          <Grid item xl={2} lg={3} md={4} xs={8}>
+            <AboutSelectionButtons
+              activeSectionKey={activeSectionKey}
+              onButtonClick={setActiveSectionKey}
+            />
+          </Grid>
+        )}
+        <Grid item xl={4} lg={6} md={7} sm={10} xs={11}>
+          {isMobile ? (
+            <AboutSelectionButtonsMobile
+              activeSectionKey={activeSectionKey}
+              onButtonClick={setActiveSectionKey}
+            />
+          ) : null}
           <AboutSelectionContent activeSectionKey={activeSectionKey} />
         </Grid>
       </Grid>

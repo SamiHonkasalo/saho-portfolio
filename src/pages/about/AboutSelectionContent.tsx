@@ -11,6 +11,7 @@ import {
 import { motion, Variants } from "framer-motion";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useIsMobile } from "~/utils/useIsMobile";
 import {
   AboutPageSectionKey,
   AboutPageSections,
@@ -22,29 +23,26 @@ const { section: MotionSection } = motion;
 const SectionVariants: Variants = {
   offUpper: {
     opacity: 0,
-    y: -200,
   },
   offLower: {
     opacity: 0,
-    y: 200,
   },
   on: {
     opacity: 1,
-    y: 0,
     transition: {
-      duration: 0.4,
+      duration: 0.1,
     },
   },
 };
 
 const Experiences: ExperienceItemProps[] = [
   {
-    title: "Software Developer",
+    titleTranslationKey: "nodeon",
     company: "Nodeon Finland Oy",
     from: { month: 1, year: 2021 },
   },
   {
-    title: "Software Developer",
+    titleTranslationKey: "mock",
     company: "Lorem Ipsum",
     from: { month: 1, year: 2018 },
     to: { month: 1, year: 2021 },
@@ -58,6 +56,7 @@ export const AboutSelectionContent = ({
   activeSectionKey,
 }: Props): JSX.Element => {
   const [prevSectionKey, setprevSectionKey] = React.useState(activeSectionKey);
+  const isMobile = useIsMobile();
 
   React.useEffect(() => {
     setprevSectionKey(activeSectionKey);
@@ -66,10 +65,16 @@ export const AboutSelectionContent = ({
   const content = React.useMemo(() => {
     switch (activeSectionKey) {
       case "me":
-        return <p>me</p>;
+        return (
+          <MeSectionWrapper
+            prevKey={prevSectionKey}
+            curKey={activeSectionKey}
+            section={<AboutMeText />}
+          />
+        );
       case "experience":
         return (
-          <SectionWrapper
+          <ExperienceSectionWrapper
             prevKey={prevSectionKey}
             curKey={activeSectionKey}
             section={
@@ -82,7 +87,13 @@ export const AboutSelectionContent = ({
           />
         );
       case "education":
-        return <p>education</p>;
+        return (
+          <EducationSectionWrapper
+            prevKey={prevSectionKey}
+            curKey={activeSectionKey}
+            section={<AboutMeText />}
+          />
+        );
 
       default:
         return null;
@@ -94,7 +105,7 @@ export const AboutSelectionContent = ({
       sx={{
         backgroundColor: (theme) => theme.palette.common.white,
         height: ABOUT_CONTENT_HEIGHT,
-        p: 3,
+        p: isMobile ? 2 : 3,
       }}
     >
       {content}
@@ -132,18 +143,20 @@ type AboutTimespan = {
   to?: MonthYear;
 };
 type ExperienceItem = {
-  title: string;
+  titleTranslationKey: string;
   company: string;
 };
 
 type ExperienceItemProps = ExperienceItem & AboutTimespan;
 
 function ExperienceListItem({
-  title,
+  titleTranslationKey,
   company,
   from,
   to,
 }: ExperienceItemProps): JSX.Element {
+  const { t } = useTranslation("experience");
+  const isMobile = useIsMobile();
   return (
     <ListItem>
       <ListItemIcon sx={{ color: (theme) => theme.palette.common.black }}>
@@ -154,6 +167,7 @@ function ExperienceListItem({
         primaryTypographyProps={{
           color: (theme) => theme.palette.common.black,
           fontWeight: (theme) => theme.typography.fontWeightBold,
+          fontSize: (theme) => theme.typography.pxToRem(isMobile ? 14 : 16),
         }}
         secondaryTypographyProps={{
           color: (theme) => theme.palette.common.black,
@@ -163,15 +177,16 @@ function ExperienceListItem({
             sx={{
               color: (theme) => theme.palette.common.black,
               fontWeight: (theme) => theme.typography.fontWeightBold,
+              fontSize: (theme) => theme.typography.pxToRem(isMobile ? 14 : 16),
             }}
           >
-            {title}
+            {t(titleTranslationKey)}
           </Typography>
         }
         secondary={
           <>
             <Typography
-              component="span"
+              component={isMobile ? "p" : "span"}
               sx={{
                 mr: 2,
                 color: (theme) => theme.palette.grey[600],
@@ -187,7 +202,10 @@ function ExperienceListItem({
   );
 }
 
-function timespansToComponent(from: MonthYear, to?: MonthYear): JSX.Element {
+function timespansToComponent(
+  from: MonthYear,
+  to: MonthYear | undefined,
+): JSX.Element {
   return (
     <>
       <Typography
@@ -218,7 +236,7 @@ type SectionWrapperProps = {
   prevKey: AboutPageSectionKey;
   curKey: AboutPageSectionKey;
 };
-function SectionWrapper({
+function MeSectionWrapper({
   section,
   prevKey,
   curKey,
@@ -237,5 +255,60 @@ function SectionWrapper({
       <AboutSelectionContentTitle title={t(curKey)} />
       {section}
     </MotionSection>
+  );
+}
+function ExperienceSectionWrapper({
+  section,
+  prevKey,
+  curKey,
+}: SectionWrapperProps): JSX.Element {
+  const { t } = useTranslation("about");
+  return (
+    <MotionSection
+      variants={SectionVariants}
+      initial={
+        AboutPageSections[prevKey].order < AboutPageSections[curKey].order
+          ? "offUpper"
+          : "offLower"
+      }
+      animate="on"
+    >
+      <AboutSelectionContentTitle title={t(curKey)} />
+      {section}
+    </MotionSection>
+  );
+}
+function EducationSectionWrapper({
+  section,
+  prevKey,
+  curKey,
+}: SectionWrapperProps): JSX.Element {
+  const { t } = useTranslation("about");
+  return (
+    <MotionSection
+      variants={SectionVariants}
+      initial={
+        AboutPageSections[prevKey].order < AboutPageSections[curKey].order
+          ? "offUpper"
+          : "offLower"
+      }
+      animate="on"
+    >
+      <AboutSelectionContentTitle title={t(curKey)} />
+      {section}
+    </MotionSection>
+  );
+}
+
+function AboutMeText(): JSX.Element {
+  const { t } = useTranslation("about");
+  return (
+    <Typography
+      variant="body2"
+      whiteSpace="pre-line"
+      sx={{ color: (theme) => theme.palette.common.black, m: 2 }}
+    >
+      {t("me-text")}
+    </Typography>
   );
 }

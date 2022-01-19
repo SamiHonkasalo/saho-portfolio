@@ -4,6 +4,14 @@
     "card-content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In interdum at amet eleifend. Purus diam tellus nam pellentesque lorem.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. In interdum at amet eleifend. Purus diam tellus nam pellentesque lorem."
   },
   "about": {
-    "page-title": "Mie"
+    "page-title": "Perusjutut",
+    "me": "Mie",
+    "experience": "Työ",
+    "education": "Koulutus",
+    "me-text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In interdum at amet eleifend. Purus diam tellus nam pellentesque lorem.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. In interdum at amet eleifend. Purus diam tellus nam pellentesque lorem."
+  },
+  "experience": {
+    "nodeon": "Ohjelmistokehittäjä",
+    "mock": "Lorem Ipsumer"
   }
 }

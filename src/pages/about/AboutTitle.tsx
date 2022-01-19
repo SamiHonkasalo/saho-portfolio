@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 export const AboutTitle = (): JSX.Element => {
   const { t } = useTranslation("about");
   return (
-    <Paper sx={{ py: 1, pl: 1, pr: 3, width: 212, height: 49, mx: "auto" }}>
+    <Paper sx={{ py: 1, px: 2, width: 212, height: 49, mx: "auto" }}>
       <Typography
         variant="h4"
         sx={{
