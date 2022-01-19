@@ -26,4 +26,13 @@ export const AppTheme = createTheme({
       },
     },
   },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+      html {
+        scroll-behavior: smooth
+      }
+      `,
+    },
+  },
 });

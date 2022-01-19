@@ -120,7 +120,7 @@ function HeroCardTitle() {
   const { t } = useTranslation("hero");
   const isMobile = useIsMobile();
   return (
-    <Paper sx={{ py: 1, pl: 1, pr: 3 }}>
+    <Paper sx={{ py: 1, pl: 1, pr: 3 }} id="home">
       <Typography
         variant="h4"
         sx={{

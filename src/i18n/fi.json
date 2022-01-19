@@ -1,4 +1,10 @@
 {
+  "nav": {
+    "home": "Koti",
+    "about": "Perusjutut",
+    "technologies": "Teknologiat",
+    "contact": "Yhteystiedot"
+  },
   "hero": {
     "card-title": "Ketterää Fullstack-Kehitystä",
     "card-content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In interdum at amet eleifend. Purus diam tellus nam pellentesque lorem.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. In interdum at amet eleifend. Purus diam tellus nam pellentesque lorem."
