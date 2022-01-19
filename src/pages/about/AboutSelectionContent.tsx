@@ -127,6 +127,7 @@ function AboutSelectionContentTitle({
         fontWeight: theme.typography.fontWeightBold,
         fontSize: theme.typography.pxToRem(24),
         color: theme.palette.common.black,
+        ml: 2,
       }}
     >
       {title}
