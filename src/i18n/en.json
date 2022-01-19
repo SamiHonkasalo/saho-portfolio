@@ -12,6 +12,12 @@
   },
   "experience": {
     "nodeon": "Software Developer",
-    "mock": "Lorem Ipsumer"
+    "jamk": "Visiting Lecturer",
+    "devecto": "Software Developer",
+    "previous": "Automation Engineer"
+  },
+  "education": {
+    "it": "ICT Engineer",
+    "automation": "Automation Engineer"
   }
 }

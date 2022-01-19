@@ -12,6 +12,12 @@
   },
   "experience": {
     "nodeon": "Ohjelmistokehittäjä",
-    "mock": "Lorem Ipsumer"
+    "jamk": "Sivutoiminen Tuntiopettaja",
+    "devecto": "Ohjelmistokehittäjä",
+    "previous": "Automaatioinsinööri"
+  },
+  "education": {
+    "it": "Tieto- ja viestintätekniikan insinööri",
+    "automation": "Automaatiotekniikan insinööri"
   }
 }
