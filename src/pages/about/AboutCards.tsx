@@ -6,8 +6,14 @@ import { AboutSelectionContent } from "./AboutSelectionContent";
 
 const { div: MotionDiv } = motion;
 
-export const AboutPageSections = ["me", "experience", "education"] as const;
-export type AboutPageSection = typeof AboutPageSections[number];
+export const AboutPageSectionKeys = ["me", "experience", "education"] as const;
+export type AboutPageSectionKey = typeof AboutPageSectionKeys[number];
+export type AboutPageSection = Record<AboutPageSectionKey, { order: number }>;
+export const AboutPageSections: AboutPageSection = {
+  me: { order: 1 },
+  experience: { order: 2 },
+  education: { order: 3 },
+};
 
 export const ABOUT_CONTENT_HEIGHT = 450;
 
@@ -27,8 +33,8 @@ const TransitionVariants: Variants = {
   },
 };
 export const AboutCards = (): JSX.Element => {
-  const [activeSection, setActiveSection] =
-    React.useState<AboutPageSection>("experience");
+  const [activeSectionKey, setActiveSectionKey] =
+    React.useState<AboutPageSectionKey>("experience");
 
   return (
     <MotionDiv
@@ -40,12 +46,12 @@ export const AboutCards = (): JSX.Element => {
       <Grid container spacing={3} justifyContent="center" sx={{ mt: 8 }}>
         <Grid item xl={2} lg={3} md={4} sm={5} xs={8}>
           <AboutSelectionButtons
-            activeSection={activeSection}
-            onButtonClick={setActiveSection}
+            activeSectionKey={activeSectionKey}
+            onButtonClick={setActiveSectionKey}
           />
         </Grid>
         <Grid item xl={4} lg={5} md={6} sm={6} xs={8}>
-          <AboutSelectionContent activeSection={activeSection} />
+          <AboutSelectionContent activeSectionKey={activeSectionKey} />
         </Grid>
       </Grid>
     </MotionDiv>

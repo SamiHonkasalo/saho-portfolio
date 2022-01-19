@@ -2,18 +2,18 @@ import { Button, Card, Grid, useTheme } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import {
-  AboutPageSection,
-  AboutPageSections,
+  AboutPageSectionKey,
+  AboutPageSectionKeys,
   ABOUT_CONTENT_HEIGHT,
 } from "./AboutCards";
 
 type Props = {
-  activeSection: AboutPageSection;
-  onButtonClick: (clickedSection: AboutPageSection) => void;
+  activeSectionKey: AboutPageSectionKey;
+  onButtonClick: (clickedSection: AboutPageSectionKey) => void;
 };
 
 export const AboutSelectionButtons = ({
-  activeSection,
+  activeSectionKey,
   onButtonClick,
 }: Props): JSX.Element => {
   const { t } = useTranslation("about");
@@ -25,12 +25,12 @@ export const AboutSelectionButtons = ({
       }}
     >
       <Grid container spacing={3} sx={{ pt: 5 }}>
-        {AboutPageSections.map((section) => (
+        {AboutPageSectionKeys.map((section) => (
           <AboutSelectionButton
             key={section}
             section={section}
             label={t(section)}
-            active={activeSection === section}
+            active={activeSectionKey === section}
             onClick={onButtonClick}
           />
         ))}
@@ -41,9 +41,9 @@ export const AboutSelectionButtons = ({
 
 type AboutSelectionButtonProps = {
   label: string;
-  section: AboutPageSection;
+  section: AboutPageSectionKey;
   active: boolean;
-  onClick: (section: AboutPageSection) => void;
+  onClick: (section: AboutPageSectionKey) => void;
 };
 
 function AboutSelectionButton({

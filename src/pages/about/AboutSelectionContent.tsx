@@ -8,12 +8,31 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { AboutPageSection, ABOUT_CONTENT_HEIGHT } from "./AboutCards";
+import {
+  AboutPageSectionKey,
+  AboutPageSections,
+  ABOUT_CONTENT_HEIGHT,
+} from "./AboutCards";
 
 const { section: MotionSection } = motion;
+
+const SectionVariants: Variants = {
+  offUpper: {
+    opacity: 0,
+    y: -200,
+  },
+  offLower: {
+    opacity: 0,
+    y: 200,
+  },
+  on: {
+    opacity: 1,
+    y: 0,
+  },
+};
 
 const Experiences: ExperienceItemProps[] = [
   {
@@ -30,24 +49,34 @@ const Experiences: ExperienceItemProps[] = [
 ];
 
 type Props = {
-  activeSection: AboutPageSection;
+  activeSectionKey: AboutPageSectionKey;
 };
 export const AboutSelectionContent = ({
-  activeSection,
+  activeSectionKey,
 }: Props): JSX.Element => {
-  const { t } = useTranslation("about");
+  const [prevSectionKey, setprevSectionKey] = React.useState(activeSectionKey);
+
+  React.useEffect(() => {
+    setprevSectionKey(activeSectionKey);
+  }, [activeSectionKey]);
 
   const content = React.useMemo(() => {
-    switch (activeSection) {
+    switch (activeSectionKey) {
       case "me":
         return <p>me</p>;
       case "experience":
         return (
-          <List>
-            {Experiences.map((e) => (
-              <ExperienceListItem key={e.company} {...e} />
-            ))}
-          </List>
+          <SectionWrapper
+            prevKey={prevSectionKey}
+            curKey={activeSectionKey}
+            section={
+              <List>
+                {Experiences.map((e) => (
+                  <ExperienceListItem key={e.company} {...e} />
+                ))}
+              </List>
+            }
+          />
         );
       case "education":
         return <p>education</p>;
@@ -55,7 +84,7 @@ export const AboutSelectionContent = ({
       default:
         return null;
     }
-  }, [activeSection]);
+  }, [activeSectionKey, prevSectionKey]);
 
   return (
     <Card
@@ -65,10 +94,7 @@ export const AboutSelectionContent = ({
         p: 3,
       }}
     >
-      <MotionSection>
-        <AboutSelectionContentTitle title={t(activeSection)} />
-        {content}
-      </MotionSection>
+      {content}
     </Card>
   );
 };
@@ -181,5 +207,32 @@ function timespansToComponent(from: MonthYear, to?: MonthYear): JSX.Element {
           : String.fromCharCode(8594)}
       </Typography>
     </>
+  );
+}
+
+type SectionWrapperProps = {
+  section: JSX.Element;
+  prevKey: AboutPageSectionKey;
+  curKey: AboutPageSectionKey;
+};
+function SectionWrapper({
+  section,
+  prevKey,
+  curKey,
+}: SectionWrapperProps): JSX.Element {
+  const { t } = useTranslation("about");
+  return (
+    <MotionSection
+      variants={SectionVariants}
+      initial={
+        AboutPageSections[prevKey].order < AboutPageSections[curKey].order
+          ? "offUpper"
+          : "offLower"
+      }
+      animate="on"
+    >
+      <AboutSelectionContentTitle title={t(curKey)} />
+      {section}
+    </MotionSection>
   );
 }

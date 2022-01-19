@@ -5,7 +5,7 @@ import { Hero } from "~/pages/hero/Hero";
 
 export function Layout(): JSX.Element {
   return (
-    <Box minHeight="100vh">
+    <Box minHeight="100vh" overflow="hidden">
       <Header />
       <Hero />
       <About />
