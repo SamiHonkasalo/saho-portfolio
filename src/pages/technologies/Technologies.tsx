@@ -6,7 +6,6 @@ export const Technologies = (): JSX.Element => {
   return (
     <Box
       sx={{
-        mt: 20,
         backgroundColor: theme.palette.background.default,
       }}
     >

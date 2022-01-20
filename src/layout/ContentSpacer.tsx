@@ -9,6 +9,7 @@ export const ContentSpacer = (): JSX.Element => {
         height: 2,
         backgroundColor: theme.palette.grey[400],
         mx: "auto",
+        my: 20,
       }}
     />
   );
