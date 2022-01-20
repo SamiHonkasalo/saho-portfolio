@@ -35,7 +35,7 @@ function MobileNavigationItem({
   const location = useLocation();
   const { hash } = location;
   const active = to === hash || (!hash && to === "#home");
-  const navigationScroll = useNavigationScroll({ active, labelKey });
+  const navigationScroll = useNavigationScroll({ labelKey });
   return (
     <BottomNavigationAction
       showLabel={active}

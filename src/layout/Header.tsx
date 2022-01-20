@@ -109,7 +109,7 @@ function NavItem({ labelKey, to }: NavItemDesktopProps): JSX.Element {
   const location = useLocation();
   const { hash } = location;
   const active = to === hash || (!hash && to === "#home");
-  const navigationScroll = useNavigationScroll({ active, labelKey });
+  const navigationScroll = useNavigationScroll({ labelKey });
 
   return (
     <Button
@@ -132,18 +132,15 @@ function NavItem({ labelKey, to }: NavItemDesktopProps): JSX.Element {
 }
 
 type UseNavigationScrollArgs = {
-  active: boolean;
   labelKey: string;
 };
 
 type NavigationScroll = (el: HTMLElement) => void;
 export function useNavigationScroll({
-  active,
   labelKey,
 }: UseNavigationScrollArgs): NavigationScroll {
   return React.useCallback(
     (el: HTMLElement) => {
-      if (active) return;
       if (labelKey === "home") {
         window.scroll({
           top: 0,
@@ -169,6 +166,6 @@ export function useNavigationScroll({
         behavior: "smooth",
       });
     },
-    [labelKey, active],
+    [labelKey],
   );
 }
