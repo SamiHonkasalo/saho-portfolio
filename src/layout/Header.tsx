@@ -1,3 +1,7 @@
+import CodeIcon from "@mui/icons-material/Code";
+import ContactMailIcon from "@mui/icons-material/ContactMail";
+import HomeIcon from "@mui/icons-material/Home";
+import InfoIcon from "@mui/icons-material/Info";
 import {
   AppBar,
   Button,
@@ -11,12 +15,14 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
+import { useIsMobile } from "~/utils/useIsMobile";
 
 export const Header = (): JSX.Element => {
   const notAtTop = useScrollTrigger({
     disableHysteresis: true,
     threshold: 75,
   });
+  const isMobile = useIsMobile();
 
   return (
     <AppBar
@@ -30,44 +36,51 @@ export const Header = (): JSX.Element => {
     >
       <Toolbar>
         <Grid container spacing={3}>
-          <Grid item xs={3} />
-          <Grid item xs={1}>
+          {isMobile ? null : <Grid item xs={2} />}
+          <Grid item xs={isMobile ? true : 1}>
             <Typography
               variant="h3"
               sx={{
                 fontWeight: (theme) => theme.typography.fontWeightBold,
                 fontSize: (theme) => theme.typography.pxToRem(24),
                 lineHeight: 1.3,
+                textAlign: isMobile ? "center" : "unset",
               }}
             >
               Sami Honkasalo
             </Typography>
           </Grid>
-          <Grid item xs={4} container>
-            <NavItems />
-          </Grid>
+          {isMobile ? null : (
+            <Grid item xs container sx={{ ml: 6 }}>
+              <NavItems />
+            </Grid>
+          )}
         </Grid>
       </Toolbar>
     </AppBar>
   );
 };
 
-const NavigationItems: NavItemType[] = [
+export const NavigationItems: NavItemType[] = [
   {
     labelKey: "home",
     to: "#home",
+    icon: <HomeIcon />,
   },
   {
     labelKey: "about",
     to: "#about",
+    icon: <InfoIcon />,
   },
   {
     labelKey: "technologies",
     to: "#technologies",
+    icon: <CodeIcon />,
   },
   {
     labelKey: "contact",
     to: "#contact",
+    icon: <ContactMailIcon />,
   },
 ];
 
@@ -82,21 +95,53 @@ function NavItems(): JSX.Element {
   );
 }
 
-type NavItemType = {
+export type NavItemType = {
   labelKey: string;
   to: string;
+  icon: JSX.Element;
 };
 
-type NavItemProps = NavItemType;
+type NavItemDesktopProps = Omit<NavItemType, "icon">;
 
-function NavItem({ labelKey, to }: NavItemProps): JSX.Element {
+function NavItem({ labelKey, to }: NavItemDesktopProps): JSX.Element {
   const { t } = useTranslation("nav");
   const theme = useTheme();
   const location = useLocation();
   const { hash } = location;
   const active = to === hash || (!hash && to === "#home");
+  const navigationScroll = useNavigationScroll({ active, labelKey });
 
-  const customScroll = React.useCallback(
+  return (
+    <Button
+      component={HashLink}
+      to={to}
+      scroll={navigationScroll}
+      sx={{
+        width: 125,
+        textTransform: "none",
+        color: active ? theme.palette.common.white : theme.palette.grey[600],
+        fontWeight: active
+          ? theme.typography.fontWeightBold
+          : theme.typography.fontWeightMedium,
+        fontSize: theme.typography.pxToRem(18),
+      }}
+    >
+      {t(labelKey)}
+    </Button>
+  );
+}
+
+type UseNavigationScrollArgs = {
+  active: boolean;
+  labelKey: string;
+};
+
+type NavigationScroll = (el: HTMLElement) => void;
+export function useNavigationScroll({
+  active,
+  labelKey,
+}: UseNavigationScrollArgs): NavigationScroll {
+  return React.useCallback(
     (el: HTMLElement) => {
       if (active) return;
       if (labelKey === "home") {
@@ -125,24 +170,5 @@ function NavItem({ labelKey, to }: NavItemProps): JSX.Element {
       });
     },
     [labelKey, active],
-  );
-
-  return (
-    <Button
-      component={HashLink}
-      to={to}
-      scroll={customScroll}
-      sx={{
-        width: 125,
-        textTransform: "none",
-        color: active ? theme.palette.common.white : theme.palette.grey[600],
-        fontWeight: active
-          ? theme.typography.fontWeightBold
-          : theme.typography.fontWeightMedium,
-        fontSize: theme.typography.pxToRem(18),
-      }}
-    >
-      {t(labelKey)}
-    </Button>
   );
 }
