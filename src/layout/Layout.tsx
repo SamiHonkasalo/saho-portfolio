@@ -9,6 +9,7 @@ import { MobileNavigation } from "./MobileNavigation";
 
 export function Layout(): JSX.Element {
   const isMobile = useIsMobile();
+
   return (
     <Box minHeight="100vh" overflow="hidden">
       <Header />

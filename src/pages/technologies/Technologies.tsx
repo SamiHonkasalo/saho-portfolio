@@ -1,4 +1,5 @@
 import { Box, useTheme } from "@mui/material";
+import { TechnologiesCards } from "./TechnologiesCards";
 import { TechnologiesTitle } from "./TechnologiesTitle";
 
 export const Technologies = (): JSX.Element => {
@@ -10,6 +11,7 @@ export const Technologies = (): JSX.Element => {
       }}
     >
       <TechnologiesTitle />
+      <TechnologiesCards />
     </Box>
   );
 };

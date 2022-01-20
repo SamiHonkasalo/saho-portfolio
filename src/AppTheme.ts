@@ -30,7 +30,7 @@ export const AppTheme = createTheme({
     MuiCssBaseline: {
       styleOverrides: `
       html {
-        scroll-behavior: smooth
+        scroll-behavior: smooth;
       }
       `,
     },

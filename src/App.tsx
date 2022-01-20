@@ -5,12 +5,12 @@ import { Layout } from "~/layout/Layout";
 
 export function App(): JSX.Element {
   return (
-    <ThemeProvider theme={AppTheme}>
-      <CssBaseline>
-        <BrowserRouter>
+    <BrowserRouter>
+      <ThemeProvider theme={AppTheme}>
+        <CssBaseline>
           <Layout />
-        </BrowserRouter>
-      </CssBaseline>
-    </ThemeProvider>
+        </CssBaseline>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }

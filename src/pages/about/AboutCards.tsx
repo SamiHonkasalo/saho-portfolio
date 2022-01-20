@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { motion, Variants } from "framer-motion";
 import React from "react";
 import { useIsMobile } from "~/utils/useIsMobile";
@@ -43,31 +43,33 @@ export const AboutCards = (): JSX.Element => {
   const isMobile = useIsMobile();
 
   return (
-    <MotionDiv
-      variants={TransitionVariants}
-      initial="cardOff"
-      whileInView="cardOn"
-      viewport={{ once: true }}
-    >
-      <Grid container spacing={3} justifyContent="center" sx={{ mt: 8 }}>
-        {isMobile ? null : (
-          <Grid item xl={2} lg={3} md={4} xs={8}>
-            <AboutSelectionButtons
-              activeSectionKey={activeSectionKey}
-              onButtonClick={setActiveSectionKey}
-            />
+    <Box sx={{ overflow: "hidden", pb: 1 }}>
+      <MotionDiv
+        variants={TransitionVariants}
+        initial="cardOff"
+        whileInView="cardOn"
+        viewport={{ once: true }}
+      >
+        <Grid container spacing={3} justifyContent="center" sx={{ mt: 8 }}>
+          {isMobile ? null : (
+            <Grid item xl={2} lg={3} md={4} xs={8}>
+              <AboutSelectionButtons
+                activeSectionKey={activeSectionKey}
+                onButtonClick={setActiveSectionKey}
+              />
+            </Grid>
+          )}
+          <Grid item xl={4} lg={6} md={7} sm={10} xs={11}>
+            {isMobile ? (
+              <AboutSelectionButtonsMobile
+                activeSectionKey={activeSectionKey}
+                onButtonClick={setActiveSectionKey}
+              />
+            ) : null}
+            <AboutSelectionContent activeSectionKey={activeSectionKey} />
           </Grid>
-        )}
-        <Grid item xl={4} lg={6} md={7} sm={10} xs={11}>
-          {isMobile ? (
-            <AboutSelectionButtonsMobile
-              activeSectionKey={activeSectionKey}
-              onButtonClick={setActiveSectionKey}
-            />
-          ) : null}
-          <AboutSelectionContent activeSectionKey={activeSectionKey} />
         </Grid>
-      </Grid>
-    </MotionDiv>
+      </MotionDiv>
+    </Box>
   );
 };
