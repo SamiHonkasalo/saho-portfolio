@@ -17,8 +17,8 @@ export const About = (): JSX.Element => {
       sx={{
         marginTop: `-${ABOUT_PAGE_OFFSET}px`,
         backgroundColor: theme.palette.background.default,
-        minHeight: 1500,
         clipPath: `ellipse(${clipNumber}% 100% at 50% 100%)`,
+        mb: 15,
       }}
     >
       <AboutSpacer />

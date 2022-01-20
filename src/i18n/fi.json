@@ -25,5 +25,8 @@
   "education": {
     "it": "Tieto- ja viestintätekniikan insinööri",
     "automation": "Automaatiotekniikan insinööri"
+  },
+  "technologies": {
+    "page-title": "Teknologiat"
   }
 }

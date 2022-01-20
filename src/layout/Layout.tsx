@@ -2,7 +2,9 @@ import { Box } from "@mui/material";
 import { Header } from "~/layout/Header";
 import { About } from "~/pages/about/About";
 import { Hero } from "~/pages/hero/Hero";
+import { Technologies } from "~/pages/technologies/Technologies";
 import { useIsMobile } from "~/utils/useIsMobile";
+import { ContentSpacer } from "./ContentSpacer";
 import { MobileNavigation } from "./MobileNavigation";
 
 export function Layout(): JSX.Element {
@@ -12,6 +14,8 @@ export function Layout(): JSX.Element {
       <Header />
       <Hero />
       <About />
+      <ContentSpacer />
+      <Technologies />
       {isMobile ? <MobileNavigation /> : null}
     </Box>
   );

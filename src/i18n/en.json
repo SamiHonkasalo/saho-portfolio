@@ -25,5 +25,8 @@
   "education": {
     "it": "ICT Engineer",
     "automation": "Automation Engineer"
+  },
+  "technologies": {
+    "page-title": "Technologies"
   }
 }
