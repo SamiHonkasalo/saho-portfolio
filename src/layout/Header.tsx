@@ -88,12 +88,13 @@ type NavItemType = {
 };
 
 type NavItemProps = NavItemType;
+
 function NavItem({ labelKey, to }: NavItemProps): JSX.Element {
   const { t } = useTranslation("nav");
   const theme = useTheme();
   const location = useLocation();
   const { hash } = location;
-  const active = to === hash;
+  const active = to === hash || (!hash && to === "#home");
 
   const customScroll = React.useCallback(
     (el: HTMLElement) => {
