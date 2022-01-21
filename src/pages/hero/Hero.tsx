@@ -8,6 +8,7 @@ export const Hero = (): JSX.Element => {
     <Box
       sx={{
         height: "100vh",
+        minHeight: 800,
         background: `url(${heroImage}) no-repeat center center fixed`,
         backgroundSize: "cover",
       }}
