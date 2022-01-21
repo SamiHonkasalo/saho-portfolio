@@ -28,5 +28,9 @@
   },
   "technologies": {
     "page-title": "Teknologiat"
+  },
+  "contact": {
+    "page-title": "Yhteystiedot",
+    "email": "Sähköposti"
   }
 }

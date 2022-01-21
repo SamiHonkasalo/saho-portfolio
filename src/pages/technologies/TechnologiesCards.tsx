@@ -29,7 +29,6 @@ export const TechnologiesCards = (): JSX.Element => {
     <Box
       sx={{
         mt: 8,
-        mb: 20,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

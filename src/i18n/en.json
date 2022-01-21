@@ -28,5 +28,9 @@
   },
   "technologies": {
     "page-title": "Technologies"
+  },
+  "contact": {
+    "page-title": "Contact",
+    "email": "Email"
   }
 }

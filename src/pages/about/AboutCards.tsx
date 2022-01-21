@@ -19,8 +19,6 @@ export const AboutPageSections: AboutPageSection = {
   education: { order: 3 },
 };
 
-export const ABOUT_CONTENT_HEIGHT = 450;
-
 const TransitionVariants: Variants = {
   cardOff: {
     y: 300,

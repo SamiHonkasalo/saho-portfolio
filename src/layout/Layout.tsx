@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import { Header } from "~/layout/Header";
 import { About } from "~/pages/about/About";
+import { Contact } from "~/pages/contact/Contact";
 import { Hero } from "~/pages/hero/Hero";
 import { Technologies } from "~/pages/technologies/Technologies";
 import { useIsMobile } from "~/utils/useIsMobile";
@@ -17,6 +18,7 @@ export function Layout(): JSX.Element {
       <About />
       <ContentSpacer />
       <Technologies />
+      <Contact />
       {isMobile ? <MobileNavigation /> : null}
     </Box>
   );

@@ -16,6 +16,7 @@ import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import { useIsMobile } from "~/utils/useIsMobile";
+import { LanguageButton } from "./LanguageButton";
 
 export const Header = (): JSX.Element => {
   const notAtTop = useScrollTrigger({
@@ -51,10 +52,13 @@ export const Header = (): JSX.Element => {
             </Typography>
           </Grid>
           {isMobile ? null : (
-            <Grid item xs container sx={{ ml: 6 }}>
+            <Grid item xs="auto" container sx={{ ml: 6 }}>
               <NavItems />
             </Grid>
           )}
+          <Grid item xs="auto">
+            <LanguageButton />
+          </Grid>
         </Grid>
       </Toolbar>
     </AppBar>
@@ -152,6 +156,12 @@ export function useNavigationScroll({
       let topOffset = 0;
       switch (labelKey) {
         case "about":
+          topOffset = 100;
+          break;
+        case "technologies":
+          topOffset = 100;
+          break;
+        case "contact":
           topOffset = 100;
           break;
 

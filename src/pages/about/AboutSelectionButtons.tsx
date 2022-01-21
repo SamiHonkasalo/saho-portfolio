@@ -18,7 +18,6 @@ import {
   AboutPageSectionKey,
   AboutPageSectionKeys,
   AboutPageSections,
-  ABOUT_CONTENT_HEIGHT,
 } from "./AboutCards";
 
 const { div: MotionDiv } = motion;
@@ -37,7 +36,7 @@ export const AboutSelectionButtons = ({
     <Card
       sx={{
         backgroundColor: (theme) => theme.palette.common.white,
-        height: ABOUT_CONTENT_HEIGHT,
+        height: "100%",
         position: "relative",
         overflow: "visible",
         marginTop: 3,

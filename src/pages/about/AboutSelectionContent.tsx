@@ -13,11 +13,7 @@ import { motion, Variants } from "framer-motion";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useIsMobile } from "~/utils/useIsMobile";
-import {
-  AboutPageSectionKey,
-  AboutPageSections,
-  ABOUT_CONTENT_HEIGHT,
-} from "./AboutCards";
+import { AboutPageSectionKey, AboutPageSections } from "./AboutCards";
 
 const { section: MotionSection } = motion;
 
@@ -138,7 +134,8 @@ export const AboutSelectionContent = ({
     <Card
       sx={{
         backgroundColor: (theme) => theme.palette.common.white,
-        height: ABOUT_CONTENT_HEIGHT,
+        height: "auto",
+        minHeight: 500,
         p: isMobile ? 2 : 3,
       }}
     >
