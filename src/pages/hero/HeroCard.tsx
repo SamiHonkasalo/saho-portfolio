@@ -137,6 +137,10 @@ function HeroCardTitle() {
 
 function HeroCardText() {
   const { t } = useTranslation("hero");
+  const dob = new Date(1994, 10, 3);
+  const diffMs = Date.now() - dob.getTime();
+  const ageDate = new Date(diffMs);
+  const age = Math.abs(ageDate.getFullYear() - 1970);
   return (
     <MotionDiv
       variants={TransitionVariants}
@@ -145,7 +149,7 @@ function HeroCardText() {
       viewport={{ once: true }}
     >
       <Typography variant="body2" whiteSpace="pre-line">
-        {t("card-content")}
+        {t("card-content", { age })}
       </Typography>
     </MotionDiv>
   );
