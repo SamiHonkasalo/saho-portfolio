@@ -42,6 +42,7 @@ const Experiences: ExperienceItemProps[] = [
     titleTranslationKey: "jamk",
     company: "JAMK",
     from: { month: 8, year: 2019 },
+    to: { month: 7, year: 2022 },
   },
   {
     titleTranslationKey: "devecto",
