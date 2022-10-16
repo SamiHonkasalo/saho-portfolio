@@ -4,9 +4,8 @@ import {
   Paper,
   useTheme,
 } from "@mui/material";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
-import { HashLink } from "react-router-hash-link";
 import { NavigationItems, NavItemType, useNavigationScroll } from "./Header";
 
 export const MobileNavigation = (): JSX.Element => {
@@ -25,23 +24,33 @@ export const MobileNavigation = (): JSX.Element => {
 };
 
 type MobileNavigationItemProps = NavItemType;
-function MobileNavigationItem({
-  to,
-  labelKey,
-  icon,
-}: MobileNavigationItemProps): JSX.Element {
+function MobileNavigationItem(props: MobileNavigationItemProps): JSX.Element {
+  const { to, labelKey, icon } = props;
   const { t } = useTranslation("nav");
   const theme = useTheme();
-  const location = useLocation();
-  const { hash } = location;
-  const active = to === hash || (!hash && to === "#home");
-  const navigationScroll = useNavigationScroll({ labelKey });
+  const toHash = `#${to}`;
+  const [activeHash, setActiveHash] = React.useState(window.location.hash);
+  React.useEffect(() => {
+    const listener = () => {
+      setActiveHash(window.location.hash);
+    };
+    document.addEventListener("scroll", listener);
+    return () => {
+      document.removeEventListener("scroll", listener);
+    };
+  }, []);
+
+  const active = toHash === activeHash;
+  const navigationScroll = useNavigationScroll(props);
+  const handleClick: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
+    e.preventDefault();
+    navigationScroll();
+  };
   return (
     <BottomNavigationAction
       showLabel={active}
-      component={HashLink}
-      scroll={navigationScroll}
-      to={to}
+      href={toHash}
+      onClick={handleClick}
       label={t(labelKey)}
       icon={icon}
       sx={{

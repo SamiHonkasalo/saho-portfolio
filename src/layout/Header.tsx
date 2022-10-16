@@ -13,8 +13,6 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
-import { HashLink } from "react-router-hash-link";
 import { useIsMobile } from "~/utils/useIsMobile";
 import { LanguageButton } from "./LanguageButton";
 
@@ -68,23 +66,27 @@ export const Header = (): JSX.Element => {
 export const NavigationItems: NavItemType[] = [
   {
     labelKey: "home",
-    to: "#home",
+    to: "home",
     icon: <HomeIcon />,
+    offset: "top",
   },
   {
     labelKey: "about",
-    to: "#about",
+    to: "about",
     icon: <InfoIcon />,
+    offset: 100,
   },
   {
     labelKey: "technologies",
-    to: "#technologies",
+    to: "technologies",
     icon: <CodeIcon />,
+    offset: 100,
   },
   {
     labelKey: "contact",
-    to: "#contact",
+    to: "contact",
     icon: <ContactMailIcon />,
+    offset: 100,
   },
 ];
 
@@ -103,23 +105,39 @@ export type NavItemType = {
   labelKey: string;
   to: string;
   icon: JSX.Element;
+  offset: "top" | number;
 };
 
-type NavItemDesktopProps = Omit<NavItemType, "icon">;
+type NavItemDesktopProps = NavItemType;
 
-function NavItem({ labelKey, to }: NavItemDesktopProps): JSX.Element {
+function NavItem(props: NavItemDesktopProps): JSX.Element {
+  const { labelKey, to } = props;
   const { t } = useTranslation("nav");
   const theme = useTheme();
-  const location = useLocation();
-  const { hash } = location;
-  const active = to === hash || (!hash && to === "#home");
-  const navigationScroll = useNavigationScroll({ labelKey });
+  const [activeHash, setActiveHash] = React.useState(window.location.hash);
+  React.useEffect(() => {
+    const listener = () => {
+      setActiveHash(window.location.hash);
+    };
+    document.addEventListener("scroll", listener);
+    return () => {
+      document.removeEventListener("scroll", listener);
+    };
+  }, []);
+
+  const toHash = `#${to}`;
+  const active = toHash === activeHash;
+  const navigationScroll = useNavigationScroll(props);
+
+  const handleClick: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
+    e.preventDefault();
+    navigationScroll();
+  };
 
   return (
     <Button
-      component={HashLink}
-      to={to}
-      scroll={navigationScroll}
+      href={toHash}
+      onClick={handleClick}
       sx={{
         width: 125,
         textTransform: "none",
@@ -135,47 +153,26 @@ function NavItem({ labelKey, to }: NavItemDesktopProps): JSX.Element {
   );
 }
 
-type UseNavigationScrollArgs = {
-  labelKey: string;
-};
+type UseNavigationScrollArgs = NavItemType;
 
-type NavigationScroll = (el: HTMLElement) => void;
+type NavigationScroll = () => void;
 export function useNavigationScroll({
-  labelKey,
+  offset,
+  to,
 }: UseNavigationScrollArgs): NavigationScroll {
-  return React.useCallback(
-    (el: HTMLElement) => {
-      if (labelKey === "home") {
-        window.scroll({
-          top: 0,
-          left: 0,
-          behavior: "smooth",
-        });
-        return;
-      }
-      let topOffset = 0;
-      switch (labelKey) {
-        case "about":
-          topOffset = 100;
-          break;
-        case "technologies":
-          topOffset = 100;
-          break;
-        case "contact":
-          topOffset = 100;
-          break;
-
-        default:
-          break;
-      }
-      const elTop = el.getBoundingClientRect().top;
-      const windowTop = window.scrollY;
-      window.scroll({
-        top: elTop + windowTop - topOffset,
-        left: 0,
-        behavior: "smooth",
-      });
-    },
-    [labelKey],
-  );
+  return React.useCallback(() => {
+    const el = document.getElementById(to);
+    if (!el) return;
+    if (offset === "top") {
+      window.scroll({ top: 0, behavior: "smooth" });
+      return;
+    }
+    const elTop = el.getBoundingClientRect().top;
+    const windowTop = window.scrollY;
+    window.scroll({
+      top: elTop + windowTop - offset,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, [offset, to]);
 }

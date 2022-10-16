@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
-import { Header } from "~/layout/Header";
+import React from "react";
+import { Header, NavigationItems, NavItemType } from "~/layout/Header";
 import { About } from "~/pages/about/About";
 import { Contact } from "~/pages/contact/Contact";
 import { Hero } from "~/pages/hero/Hero";
@@ -10,6 +11,33 @@ import { MobileNavigation } from "./MobileNavigation";
 
 export function Layout(): JSX.Element {
   const isMobile = useIsMobile();
+  React.useEffect(() => {
+    if (!window.location.hash) {
+      window.history.pushState({}, "", "#home");
+    }
+  });
+
+  React.useEffect(() => {
+    const scrollListener = () => {
+      const itemsInView: NavItemType[] = [];
+      NavigationItems.forEach((item) => {
+        const el = document.getElementById(item.to);
+        if (!el) return;
+        const inView = elementInViewport(el);
+        if (!inView) return;
+        itemsInView.push(item);
+      });
+      if (!itemsInView.length) return;
+      const itemHash = `#${itemsInView[0].to}`;
+      if (window.location.hash !== itemHash) {
+        window.history.pushState({}, "", itemHash);
+      }
+    };
+    document.addEventListener("scroll", scrollListener);
+    return () => {
+      document.removeEventListener("scroll", scrollListener);
+    };
+  }, []);
 
   return (
     <Box minHeight="100vh" overflow="hidden">
@@ -21,5 +49,19 @@ export function Layout(): JSX.Element {
       <Contact />
       {isMobile ? <MobileNavigation /> : null}
     </Box>
+  );
+}
+
+function elementInViewport(el: HTMLElement) {
+  const bounding = el.getBoundingClientRect();
+  const elHeight = el.offsetHeight;
+  const elWidth = el.offsetWidth;
+  return (
+    bounding.top >= -elHeight &&
+    bounding.left >= -elWidth &&
+    bounding.right <=
+      (window.innerWidth || document.documentElement.clientWidth) + elWidth &&
+    bounding.bottom <=
+      (window.innerHeight || document.documentElement.clientHeight) + elHeight
   );
 }
