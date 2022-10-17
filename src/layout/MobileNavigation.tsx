@@ -41,10 +41,10 @@ function MobileNavigationItem(props: MobileNavigationItemProps): JSX.Element {
   }, []);
 
   const active = toHash === activeHash;
-  const navigationScroll = useNavigationScroll(props);
+  const navigationScroll = useNavigationScroll();
   const handleClick: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
     e.preventDefault();
-    navigationScroll();
+    navigationScroll(props);
   };
   return (
     <BottomNavigationAction

@@ -1,6 +1,11 @@
 import { Box } from "@mui/material";
 import React from "react";
-import { Header, NavigationItems, NavItemType } from "~/layout/Header";
+import {
+  Header,
+  NavigationItems,
+  NavItemType,
+  useNavigationScroll,
+} from "~/layout/Header";
 import { About } from "~/pages/about/About";
 import { Contact } from "~/pages/contact/Contact";
 import { Hero } from "~/pages/hero/Hero";
@@ -11,11 +16,21 @@ import { MobileNavigation } from "./MobileNavigation";
 
 export function Layout(): JSX.Element {
   const isMobile = useIsMobile();
+  const scrollToEl = useNavigationScroll();
   React.useEffect(() => {
     if (!window.location.hash) {
       window.history.pushState({}, "", "#home");
     }
-  });
+  }, []);
+
+  React.useEffect(() => {
+    const activeNavItem = NavigationItems.find(
+      (x) => `#${x.to}` === window.location.hash,
+    );
+    setTimeout(() => {
+      scrollToEl(activeNavItem ?? NavigationItems[0]);
+    }, 10);
+  }, [scrollToEl]);
 
   React.useEffect(() => {
     const scrollListener = () => {

@@ -127,11 +127,11 @@ function NavItem(props: NavItemDesktopProps): JSX.Element {
 
   const toHash = `#${to}`;
   const active = toHash === activeHash;
-  const navigationScroll = useNavigationScroll(props);
+  const navigationScroll = useNavigationScroll();
 
   const handleClick: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
     e.preventDefault();
-    navigationScroll();
+    navigationScroll(props);
   };
 
   return (
@@ -153,14 +153,8 @@ function NavItem(props: NavItemDesktopProps): JSX.Element {
   );
 }
 
-type UseNavigationScrollArgs = NavItemType;
-
-type NavigationScroll = () => void;
-export function useNavigationScroll({
-  offset,
-  to,
-}: UseNavigationScrollArgs): NavigationScroll {
-  return React.useCallback(() => {
+export function useNavigationScroll(): (item: NavItemType) => void {
+  return React.useCallback(({ offset, to }: NavItemType) => {
     const el = document.getElementById(to);
     if (!el) return;
     if (offset === "top") {
@@ -174,5 +168,5 @@ export function useNavigationScroll({
       left: 0,
       behavior: "smooth",
     });
-  }, [offset, to]);
+  }, []);
 }
