@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, debounce } from "@mui/material";
 import React from "react";
 import {
   Header,
@@ -48,9 +48,10 @@ export function Layout(): JSX.Element {
         window.history.pushState({}, "", itemHash);
       }
     };
-    document.addEventListener("scroll", scrollListener);
+    const debouncedListener = debounce(scrollListener, 50);
+    document.addEventListener("scroll", debouncedListener);
     return () => {
-      document.removeEventListener("scroll", scrollListener);
+      document.removeEventListener("scroll", debouncedListener);
     };
   }, []);
 

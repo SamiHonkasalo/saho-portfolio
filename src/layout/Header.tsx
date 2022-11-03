@@ -5,6 +5,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import {
   AppBar,
   Button,
+  debounce,
   Grid,
   Toolbar,
   Typography,
@@ -114,16 +115,7 @@ function NavItem(props: NavItemDesktopProps): JSX.Element {
   const { labelKey, to } = props;
   const { t } = useTranslation("nav");
   const theme = useTheme();
-  const [activeHash, setActiveHash] = React.useState(window.location.hash);
-  React.useEffect(() => {
-    const listener = () => {
-      setActiveHash(window.location.hash);
-    };
-    document.addEventListener("scroll", listener);
-    return () => {
-      document.removeEventListener("scroll", listener);
-    };
-  }, []);
+  const activeHash = useNavHashListener();
 
   const toHash = `#${to}`;
   const active = toHash === activeHash;
@@ -169,4 +161,20 @@ export function useNavigationScroll(): (item: NavItemType) => void {
       behavior: "smooth",
     });
   }, []);
+}
+
+export function useNavHashListener(): string {
+  const [activeHash, setActiveHash] = React.useState(window.location.hash);
+  React.useEffect(() => {
+    const listener = () => {
+      if (activeHash !== window.location.hash)
+        setActiveHash(window.location.hash);
+    };
+    const debouncedListener = debounce(listener, 100);
+    document.addEventListener("scroll", debouncedListener);
+    return () => {
+      document.removeEventListener("scroll", debouncedListener);
+    };
+  }, [activeHash]);
+  return activeHash;
 }

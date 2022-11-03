@@ -6,7 +6,12 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { NavigationItems, NavItemType, useNavigationScroll } from "./Header";
+import {
+  NavigationItems,
+  NavItemType,
+  useNavHashListener,
+  useNavigationScroll,
+} from "./Header";
 
 export const MobileNavigation = (): JSX.Element => {
   return (
@@ -29,16 +34,7 @@ function MobileNavigationItem(props: MobileNavigationItemProps): JSX.Element {
   const { t } = useTranslation("nav");
   const theme = useTheme();
   const toHash = `#${to}`;
-  const [activeHash, setActiveHash] = React.useState(window.location.hash);
-  React.useEffect(() => {
-    const listener = () => {
-      setActiveHash(window.location.hash);
-    };
-    document.addEventListener("scroll", listener);
-    return () => {
-      document.removeEventListener("scroll", listener);
-    };
-  }, []);
+  const activeHash = useNavHashListener();
 
   const active = toHash === activeHash;
   const navigationScroll = useNavigationScroll();
