@@ -17,14 +17,14 @@ import { MobileNavigation } from "./MobileNavigation";
 export function Layout(): JSX.Element {
   const isMobile = useIsMobile();
   const scrollToEl = useNavigationScroll();
-  React.useEffect(() => {
-    if (!window.location.hash) {
-      window.history.pushState({}, "", "#home");
-      setTimeout(() => {
-        scrollToEl(NavigationItems[0]);
-      }, 500);
-    }
-  }, [scrollToEl]);
+  // React.useEffect(() => {
+  //   if (!window.location.hash) {
+  //     window.history.pushState({}, "", "#home");
+  //     setTimeout(() => {
+  //       scrollToEl(NavigationItems[0]);
+  //     }, 500);
+  //   }
+  // }, [scrollToEl]);
 
   React.useEffect(() => {
     const activeNavItem = NavigationItems.find(
