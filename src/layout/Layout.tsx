@@ -20,7 +20,9 @@ export function Layout(): JSX.Element {
   React.useEffect(() => {
     if (!window.location.hash) {
       window.history.pushState({}, "", "#home");
-      scrollToEl(NavigationItems[0]);
+      setTimeout(() => {
+        scrollToEl(NavigationItems[0]);
+      }, 500);
     }
   }, [scrollToEl]);
 
