@@ -118,7 +118,8 @@ function NavItem(props: NavItemDesktopProps): JSX.Element {
   const activeHash = useNavHashListener();
 
   const toHash = `#${to}`;
-  const active = toHash === activeHash;
+  const hashMatch = toHash === activeHash;
+  const active = to === "home" ? hashMatch || !activeHash : hashMatch;
   const navigationScroll = useNavigationScroll();
 
   const handleClick: React.MouseEventHandler<HTMLAnchorElement> = (e) => {

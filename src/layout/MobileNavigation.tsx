@@ -36,7 +36,8 @@ function MobileNavigationItem(props: MobileNavigationItemProps): JSX.Element {
   const toHash = `#${to}`;
   const activeHash = useNavHashListener();
 
-  const active = toHash === activeHash;
+  const hashMatch = toHash === activeHash;
+  const active = to === "home" ? hashMatch || !activeHash : hashMatch;
   const navigationScroll = useNavigationScroll();
   const handleClick: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
     e.preventDefault();
