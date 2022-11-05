@@ -20,8 +20,9 @@ export function Layout(): JSX.Element {
   React.useEffect(() => {
     if (!window.location.hash) {
       window.history.pushState({}, "", "#home");
+      scrollToEl(NavigationItems[0]);
     }
-  }, []);
+  }, [scrollToEl]);
 
   React.useEffect(() => {
     const activeNavItem = NavigationItems.find(
