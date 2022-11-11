@@ -163,6 +163,7 @@ function AboutSelectionButtonMobile({
               transform: `scale(${active ? 1.4 : 1})`,
               transition: `transform 0.3s ease-in-out`,
               color: (theme) => theme.palette.common.black,
+              boxShadow: (theme) => theme.shadows[6],
             }}
           >
             {icon}
@@ -179,6 +180,7 @@ function AboutSelectionButtonMobile({
               variant="body2"
               textAlign="center"
               sx={{
+                mt: 1.5,
                 color: (theme) => theme.palette.common.black,
                 fontWeight: (theme) => theme.typography.fontWeightBold,
               }}
