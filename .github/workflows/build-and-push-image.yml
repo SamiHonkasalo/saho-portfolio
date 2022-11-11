@@ -1,7 +1,7 @@
 name: Build and push Docker image
 
 env:
-  image-name: "saho-portfolio"
+  image-name: saho-portfolio
 
 on:
   push:
