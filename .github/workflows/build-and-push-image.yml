@@ -6,7 +6,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: sahodev/saho-portfolio
+  IMAGE_NAME: samihonkasalo/saho-portfolio
 
 jobs:
   build-and-push-image:
