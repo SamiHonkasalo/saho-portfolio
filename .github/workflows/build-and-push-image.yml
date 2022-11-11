@@ -1,29 +1,39 @@
-name: Build and push Docker image
+name: Create and publish a Docker image
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
-    
+    branches: ['master']
+
 env:
-  IMAGE_NAME: saho-portfolio
-        
+  REGISTRY: ghcr.io
+  IMAGE_NAME: sahodev/saho-portfolio
+
 jobs:
-  docker:
+  build-and-push-image:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v3
         
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-        
-      - name: Build and push
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
           context: .
           push: true
-          tags: ghcr.io/sahodev/${{ env.IMAGE_NAME }}:latest
+          tags: "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
           cache-from: type=gha
           cache-to: type=gha,mode=max
