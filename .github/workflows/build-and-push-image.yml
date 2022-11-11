@@ -1,0 +1,25 @@
+name: Build and push Docker image
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+    
+env:
+  IMAGE_NAME: saho-portfolio
+
+jobs:
+
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Build and push
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        push: true
+        tags: "ghcr.io/sahodev/$IMAGE_NAME:latest"
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
