@@ -1,13 +1,3 @@
-import { CssBaseline, ThemeProvider } from "@mui/material";
-import { AppTheme } from "~/AppTheme";
-import { Layout } from "~/layout/Layout";
-
-export function App(): JSX.Element {
-  return (
-    <ThemeProvider theme={AppTheme}>
-      <CssBaseline>
-        <Layout />
-      </CssBaseline>
-    </ThemeProvider>
-  );
-}
+export const App = () => {
+  return <div></div>;
+};
