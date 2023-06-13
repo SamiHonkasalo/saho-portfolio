@@ -13,7 +13,7 @@ export default {
         about: "3.5rem",
       },
       fontFamily: {
-        sans: ["Ubuntu", ...defaultTheme.fontFamily.sans],
+        sans: ["Inter", ...defaultTheme.fontFamily.sans],
       },
       backgroundImage: {
         "hero-image": "url('/hero-image.png')",

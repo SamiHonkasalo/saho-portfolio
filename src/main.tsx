@@ -1,9 +1,6 @@
 import { App } from "@/App";
 import "@/index.css";
-import "@fontsource/ubuntu/300.css";
-import "@fontsource/ubuntu/400.css";
-import "@fontsource/ubuntu/500.css";
-import "@fontsource/ubuntu/700.css";
+import "@fontsource-variable/inter";
 import React from "react";
 import ReactDOM from "react-dom/client";
 

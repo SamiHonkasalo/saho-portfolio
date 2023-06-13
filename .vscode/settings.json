@@ -1,0 +1,6 @@
+{
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "i18n-ally.localesPaths": [
+        "src/i18n"
+    ]
+}

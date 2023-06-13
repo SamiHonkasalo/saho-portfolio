@@ -24,6 +24,12 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "tailwind.config.js", "postcss.config.js", "prettier.config.cjs"],
+  "include": [
+    "src",
+    "tailwind.config.js",
+    "postcss.config.js",
+    "prettier.config.cjs",
+    "@types"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
