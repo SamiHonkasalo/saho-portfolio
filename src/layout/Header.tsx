@@ -24,7 +24,7 @@ export const navItems: NavItemType[] = [
 
 export const Header = () => {
   return (
-    <header className="sticky top-0 col-span-full grid h-header grid-cols-12 text-gray-200 backdrop-blur-md">
+    <header className="sticky top-0 col-span-full grid h-header grid-cols-12 text-gray-100 backdrop-blur-md">
       <h1 className="col-start-4 w-min text-2xl font-bold">Sami Honkasalo</h1>
       <nav className="col-start-5 col-end-9 mx-2 grid h-full grid-flow-col">
         {navItems.map((x) => (
@@ -39,7 +39,7 @@ export const Header = () => {
       </nav>
       <button
         type="button"
-        className="col-end-10 flex h-full w-min items-center justify-center rounded-lg px-8 font-bold text-gray-400 hover:bg-transparent/5"
+        className="ml-auto flex h-full w-min items-center justify-center rounded-lg px-8 font-bold text-gray-400 hover:bg-transparent/5"
       >
         FI
       </button>

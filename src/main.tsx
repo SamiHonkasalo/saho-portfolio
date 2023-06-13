@@ -1,4 +1,5 @@
 import { App } from "@/App";
+import "@/i18n";
 import "@/index.css";
 import "@fontsource-variable/inter";
 import React from "react";

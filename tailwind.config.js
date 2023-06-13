@@ -16,7 +16,11 @@ export default {
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
       },
       backgroundImage: {
-        "hero-image": "url('/hero-image.png')",
+        "hero-image": "url('/hero-image.webp')",
+        "hero-avatar": "url('/hero-avatar.webp')",
+      },
+      backgroundPosition: {
+        "bottom-center": "bottom center",
       },
     },
   },
