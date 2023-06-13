@@ -1,48 +1,30 @@
-type NavItemType = {
-  label: string;
-  to: string;
-};
-
-export const navItems: NavItemType[] = [
-  {
-    label: "Home",
-    to: "#home",
-  },
-  {
-    label: "About",
-    to: "#about",
-  },
-  {
-    label: "Technologies",
-    to: "#technologies",
-  },
-  {
-    label: "Contact",
-    to: "#contact",
-  },
-];
+import { Nav } from "@/layout/Nav";
+import { useTranslation } from "react-i18next";
 
 export const Header = () => {
+  const { i18n } = useTranslation();
+
+  const lng = i18n.resolvedLanguage as string;
+
+  const handleLanguageChange = () => {
+    void i18n.changeLanguage(lng.toLowerCase() === "fi" ? "en" : "fi");
+  };
+
   return (
-    <header className="sticky top-0 col-span-full grid h-header grid-cols-12 text-gray-100 backdrop-blur-md">
-      <h1 className="col-start-4 w-min text-2xl font-bold">Sami Honkasalo</h1>
-      <nav className="col-start-5 col-end-9 mx-2 grid h-full grid-flow-col">
-        {navItems.map((x) => (
-          <a
-            key={x.to}
-            href={x.to}
-            className="flex h-full items-center justify-center rounded-lg px-4 font-bold text-gray-400 hover:bg-transparent/5"
-          >
-            {x.label}
-          </a>
-        ))}
-      </nav>
-      <button
-        type="button"
-        className="ml-auto flex h-full w-min items-center justify-center rounded-lg px-8 font-bold text-gray-400 hover:bg-transparent/5"
-      >
-        FI
-      </button>
+    <header className="sticky top-0 z-40 flex h-header w-full text-gray-100 backdrop-blur-md">
+      <div className="mx-auto flex h-full w-full max-w-5xl items-center justify-center px-4">
+        <h1 className="w-min text-2xl font-bold">Sami Honkasalo</h1>
+        <div className="hidden md:block ">
+          <Nav />
+        </div>
+        <button
+          type="button"
+          className="ml-auto flex h-full w-min items-center justify-center rounded-lg px-8 font-bold uppercase text-gray-200 hover:bg-transparent/5"
+          onClick={handleLanguageChange}
+        >
+          {lng}
+        </button>
+      </div>
     </header>
   );
 };
