@@ -13,8 +13,8 @@ export const Header = () => {
   return (
     <header className="sticky top-0 z-40 flex h-header w-full text-gray-100 backdrop-blur-md">
       <div className="mx-auto flex h-full w-full max-w-5xl items-center justify-center px-4">
-        <h1 className="w-min text-2xl font-bold">Sami Honkasalo</h1>
-        <div className="hidden md:block ">
+        <h1 className="mr-2 w-min text-2xl font-bold">Sami Honkasalo</h1>
+        <div className="hidden h-full md:block">
           <Nav />
         </div>
         <button
