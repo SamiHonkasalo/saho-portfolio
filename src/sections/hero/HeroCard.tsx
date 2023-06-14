@@ -1,3 +1,4 @@
+import { Title } from "@/components/Title";
 import { motion, Variants } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
@@ -43,11 +44,7 @@ export const HeroCard = () => {
       <div className="flex flex-col rounded-md bg-white/5 p-6 text-gray-200 mix-blend-normal shadow-md backdrop-blur-md md:flex-row">
         <div className="col-span-5 m-auto h-48 w-48 shrink-0 grow-0 rounded-full bg-slate-600/20 bg-hero-avatar bg-[size:70%_90%] bg-bottom-center bg-no-repeat md:order-1" />
         <div className="mt-4 md:mr-2 md:mt-0">
-          <div className="mb-10 h-min rounded-md bg-zinc-800 p-2" id="home">
-            <h4 className="text-center text-2xl font-bold">
-              {t("hero.card-title")}
-            </h4>
-          </div>
+          <Title>{t("hero.card-title")}</Title>
           <motion.div
             variants={TransitionVariants}
             initial="offScreen"
