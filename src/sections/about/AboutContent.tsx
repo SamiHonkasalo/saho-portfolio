@@ -83,7 +83,7 @@ export const AboutContent = ({ activeSectionKey }: Props) => {
     switch (key) {
       case "me":
         return (
-          <p className="whitespace-pre-line text-zinc-800">
+          <p className="whitespace-pre-line font-semibold text-zinc-800">
             {t("about.me-text")}
           </p>
         );
@@ -92,11 +92,12 @@ export const AboutContent = ({ activeSectionKey }: Props) => {
           <ul>
             {Experiences.map((e) => (
               <AboutListItem
+                key={`${e.title}-${e.company}`}
                 icon={AboutPageButtonIcons[key]}
                 primary={e.title}
                 secondary={e.company}
                 ternary={renderTimespan(e.from, e.to)}
-                key={e.title}
+                disabled={e.disabled}
               />
             ))}
           </ul>
@@ -107,11 +108,11 @@ export const AboutContent = ({ activeSectionKey }: Props) => {
           <ul>
             {Educations.map((e) => (
               <AboutListItem
+                key={`${e.title}-${e.school}`}
                 icon={AboutPageButtonIcons[key]}
                 primary={e.title}
                 secondary={e.school}
                 ternary={renderTimespan(e.from, e.to)}
-                key={e.title}
               />
             ))}
           </ul>
@@ -149,11 +150,20 @@ function AboutListItem({
   disabled,
 }: AboutListItemProps) {
   return (
-    <li className={clsx({ "text-current/30": disabled })}>
+    <li
+      className={clsx(
+        "my-4 flex items-center font-bold last:mb-0 [&>svg]:h-10 [&>svg]:w-10",
+        {
+          "text-gray-800/40": disabled,
+        },
+      )}
+    >
       {icon}
-      <h6>{primary}</h6>
-      <p>{secondary}</p>
-      <p>{ternary}</p>
+      <div className="ml-4">
+        <h6>{primary}</h6>
+        <p className="font-semibold">{secondary}</p>
+        <p className="font-semibold">{ternary}</p>
+      </div>
     </li>
   );
 }
@@ -164,8 +174,8 @@ function renderTimespan(
 ): JSX.Element {
   return (
     <>
-      <span className="mr-2 text-zinc-600">{`${from.month}/${from.year}`}</span>
-      <span className="text-zinc-600">
+      <span className="mr-2">{`${from.month}/${from.year}`}</span>
+      <span>
         {to
           ? `${String.fromCharCode(8211)} ${to.month}/${to.year}`
           : String.fromCharCode(8594)}

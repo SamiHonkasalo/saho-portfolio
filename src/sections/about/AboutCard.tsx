@@ -7,6 +7,7 @@ import {
 import clsx from "clsx";
 import { Variants, motion } from "framer-motion";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const TransitionVariants: Variants = {
   cardOff: {
@@ -25,6 +26,7 @@ const TransitionVariants: Variants = {
 };
 
 export const AboutCard = () => {
+  const { t } = useTranslation();
   const [activeSectionKey, setActiveSectionKey] =
     React.useState<AboutPageSectionKey>("me");
 
@@ -36,24 +38,38 @@ export const AboutCard = () => {
         whileInView="cardOn"
         viewport={{ once: true }}
       >
-        <div className="mb-6 mt-16 grid grid-flow-col items-center justify-center gap-8 px-4 md:justify-start">
+        <div className="mt-16 flex w-full max-w-xs flex-row items-center justify-start gap-4">
           {AboutPageSectionKeys.map((s) => {
+            const isActive = activeSectionKey === s;
             return (
-              <motion.button
+              <div
                 key={s}
-                type="button"
-                className={clsx(
-                  "flex h-12 w-12 items-center justify-center rounded-full bg-slate-200 text-zinc-800 shadow-md transition-all",
-                  {
-                    "scale-150": activeSectionKey === s,
-                    "shadow-xl": activeSectionKey === s,
-                    // "animate-pulse": activeSectionKey !== s,
-                  },
-                )}
-                onClick={() => setActiveSectionKey(s)}
+                className="flex flex-1 flex-col items-center justify-center p-1"
               >
-                {AboutPageButtonIcons[s]}
-              </motion.button>
+                <motion.button
+                  type="button"
+                  aria-describedby={`label-${s}`}
+                  className={clsx(
+                    "mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white text-zinc-800 shadow-xl transition-all",
+                    {
+                      "scale-150 shadow-2xl [&>*]:stroke-2": isActive,
+                      "hover:scale-125": !isActive,
+                    },
+                  )}
+                  onClick={() => setActiveSectionKey(s)}
+                >
+                  {AboutPageButtonIcons[s]}
+                </motion.button>
+                <span
+                  id={`label-${s}`}
+                  className={clsx("mt-3 text-lg", {
+                    "font-normal": !isActive,
+                    "font-bold": isActive,
+                  })}
+                >
+                  {t(`about.${s}`)}
+                </span>
+              </div>
             );
           })}
         </div>

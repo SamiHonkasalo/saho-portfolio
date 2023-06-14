@@ -1,0 +1,18 @@
+.technologies-section {
+  clip-path: ellipse(350% 100% at 50% 0%);
+}
+@media screen(sm) {
+  .technologies-section {
+    clip-path: ellipse(300% 100% at 50% 0%);
+  }
+}
+@media screen(md) {
+  .technologies-section {
+    clip-path: ellipse(250% 100% at 50% 0%);
+  }
+}
+@media screen(lg) {
+  .technologies-section {
+    clip-path: ellipse(200% 100% at 50% 0%);
+  }
+}
