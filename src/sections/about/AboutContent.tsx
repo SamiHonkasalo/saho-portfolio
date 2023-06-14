@@ -124,7 +124,7 @@ export const AboutContent = ({ activeSectionKey }: Props) => {
       variants={SectionVariants}
       initial="off"
       animate="on"
-      className="min-h-[700px] w-full rounded-lg bg-white p-8 pb-2 shadow-lg md:min-h-[500px] lg:min-h-[300px]"
+      className="min-h-[700px] w-full rounded-lg bg-white p-8 pb-2 shadow-lg md:min-h-[500px] lg:min-h-[400px]"
     >
       <h5 className="mb-4 text-lg font-bold">
         {t(`about.${activeSectionKey}`)}
