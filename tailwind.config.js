@@ -15,10 +15,6 @@ export default {
       fontFamily: {
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
       },
-      backgroundImage: {
-        "hero-image": "url('/hero-image.webp')",
-        "hero-avatar": "url('/hero-avatar.webp')",
-      },
       backgroundPosition: {
         "bottom-center": "bottom center",
       },
