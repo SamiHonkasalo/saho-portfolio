@@ -3,7 +3,10 @@ import clsx from "clsx";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-export const Header = () => {
+type Props = {
+  isMediumOrLarger: boolean;
+};
+export const Header = ({ isMediumOrLarger }: Props) => {
   const { i18n } = useTranslation();
 
   const lng = i18n.resolvedLanguage as string;
@@ -25,9 +28,11 @@ export const Header = () => {
     >
       <div className="mx-auto flex h-full w-full max-w-5xl items-center justify-center px-4">
         <h1 className="mr-2 w-min text-2xl font-bold">Sami Honkasalo</h1>
-        <div className="hidden h-full md:block">
-          <Nav />
-        </div>
+        {isMediumOrLarger ? (
+          <div className="hidden h-full md:block">
+            <Nav />
+          </div>
+        ) : null}
         <button
           type="button"
           className="ml-auto flex h-full w-min items-center justify-center rounded-lg px-8 font-bold uppercase text-gray-200 hover:bg-transparent/5"
