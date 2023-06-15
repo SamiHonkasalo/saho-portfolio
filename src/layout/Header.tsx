@@ -1,5 +1,6 @@
 import { Nav } from "@/layout/Nav";
 import clsx from "clsx";
+import React from "react";
 import { useTranslation } from "react-i18next";
 
 export const Header = () => {
@@ -7,7 +8,7 @@ export const Header = () => {
 
   const lng = i18n.resolvedLanguage as string;
 
-  const isScrolled = false;
+  const isScrolled = useIsScrolled(50);
 
   const handleLanguageChange = () => {
     void i18n.changeLanguage(lng.toLowerCase() === "fi" ? "en" : "fi");
@@ -16,8 +17,8 @@ export const Header = () => {
   return (
     <header
       className={clsx(
-        "sticky top-0 z-40 flex h-header w-full  text-gray-100 backdrop-blur-md",
-        { "bg-transparent/30 shadow-2xl": isScrolled },
+        "sticky top-0 z-40 flex h-header w-full  text-gray-100 backdrop-blur-md transition-all",
+        { "bg-transparent/50 shadow-2xl": isScrolled },
       )}
     >
       <div className="mx-auto flex h-full w-full max-w-5xl items-center justify-center px-4">
@@ -36,3 +37,19 @@ export const Header = () => {
     </header>
   );
 };
+
+function useIsScrolled(threshold: number) {
+  const [isScrolled, setIsScrolled] = React.useState(false);
+  React.useEffect(() => {
+    const listener = () => {
+      const distance = window.scrollY;
+      setIsScrolled(distance > threshold);
+    };
+    document.addEventListener("scroll", listener);
+    listener();
+    return () => {
+      document.removeEventListener("scroll", listener);
+    };
+  }, [threshold]);
+  return isScrolled;
+}
