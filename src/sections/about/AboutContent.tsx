@@ -120,7 +120,7 @@ export const AboutContent = ({ activeSectionKey }: Props) => {
     }
   };
   return (
-    <motion.section
+    <motion.div
       variants={SectionVariants}
       initial="off"
       animate="on"
@@ -128,7 +128,7 @@ export const AboutContent = ({ activeSectionKey }: Props) => {
     >
       <p className="mb-4 text-lg font-bold">{t(`about.${activeSectionKey}`)}</p>
       {getContent(activeSectionKey)}
-    </motion.section>
+    </motion.div>
   );
 };
 
