@@ -10,8 +10,10 @@ export const Header = () => {
 
   const isScrolled = useIsScrolled(50);
 
+  const nextLng = lng.toLowerCase() === "fi" ? "en" : "fi";
+
   const handleLanguageChange = () => {
-    void i18n.changeLanguage(lng.toLowerCase() === "fi" ? "en" : "fi");
+    void i18n.changeLanguage(nextLng);
   };
 
   return (
@@ -31,7 +33,7 @@ export const Header = () => {
           className="ml-auto flex h-full w-min items-center justify-center rounded-lg px-8 font-bold uppercase text-gray-200 hover:bg-transparent/5"
           onClick={handleLanguageChange}
         >
-          {lng}
+          {nextLng}
         </button>
       </div>
     </header>
