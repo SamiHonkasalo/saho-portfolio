@@ -48,7 +48,7 @@ export const AboutCard = () => {
               >
                 <motion.button
                   type="button"
-                  aria-describedby={`label-${s}`}
+                  aria-labelledby={`label-${s}`}
                   className={clsx(
                     "mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white text-zinc-800 shadow-xl transition-all",
                     {

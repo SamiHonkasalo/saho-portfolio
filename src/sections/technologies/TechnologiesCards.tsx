@@ -106,7 +106,7 @@ export const TechnologiesCards = () => {
             transition={{ type: "spring", duration: 2, bounce: 0.5 }}
             className="flex flex-col items-center rounded-lg bg-white p-4 pb-12 text-zinc-800 shadow-xl [&>svg]:h-24 [&>svg]:w-24 [&>svg]:fill-zinc-900"
           >
-            <h4 className="mb-6 text-xl font-bold">{tech.name}</h4>
+            <p className="mb-6 text-xl font-bold">{tech.name}</p>
             {tech.icon}
           </motion.div>
         );

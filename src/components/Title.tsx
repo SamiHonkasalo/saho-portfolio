@@ -16,7 +16,7 @@ export const Title = ({
       style={{ scrollMargin }}
       id={id}
     >
-      <h4 className="text-center text-2xl font-bold">{children}</h4>
+      <h2 className="text-center text-2xl font-bold">{children}</h2>
     </div>
   );
 };
