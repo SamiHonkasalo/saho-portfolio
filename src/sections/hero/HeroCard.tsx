@@ -40,7 +40,9 @@ export const HeroCard = () => {
       <div className="flex flex-col rounded-md bg-white/5 p-6 text-gray-200 mix-blend-normal shadow-md backdrop-blur-md md:flex-row">
         <div className="col-span-5 m-auto h-48 w-48 shrink-0 grow-0 rounded-full bg-slate-600/20 bg-hero-avatar bg-[size:70%_90%] bg-bottom-center bg-no-repeat md:order-1" />
         <div className="mt-4 flex flex-col items-center md:mr-2 md:mt-0 md:items-start">
-          <Title id="home">{t("hero.card-title")}</Title>
+          <Title id="home" scrollMargin="999999px">
+            {t("hero.card-title")}
+          </Title>
           <motion.div
             variants={TransitionVariants}
             initial="offScreen"

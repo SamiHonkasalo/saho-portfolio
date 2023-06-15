@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -9,6 +10,11 @@ type NavItemType = {
 
 export const Nav = () => {
   const { t } = useTranslation();
+
+  const activeItem = useActiveNavItem();
+  const activeHash = `#${activeItem}`;
+  const { hash } = window.location;
+  if (hash !== activeHash) window.history.pushState({}, "", activeHash);
 
   const navItems: NavItemType[] = React.useMemo(
     () => [
@@ -97,23 +103,90 @@ export const Nav = () => {
 
   return (
     <nav className="grid h-full grid-flow-col">
-      {navItems.map((x) => (
-        <React.Fragment key={x.to}>
-          <a
-            href={x.to}
-            className="hidden h-full items-center justify-center rounded-lg px-4 font-bold text-gray-400 transition-all hover:bg-transparent/5 md:flex"
-          >
-            {x.label}
-          </a>
-          <a
-            key={x.to}
-            href={x.to}
-            className="flex h-full items-center justify-center text-gray-400 transition-all md:hidden"
-          >
-            {x.icon}
-          </a>
-        </React.Fragment>
-      ))}
+      {navItems.map((x) => {
+        const isActive = x.to === activeHash;
+        return (
+          <React.Fragment key={x.to}>
+            <a
+              href={x.to}
+              className={clsx(
+                "hidden h-full items-center justify-center rounded-lg px-4 font-bold  transition-all hover:bg-transparent/5 md:flex",
+                {
+                  "text-gray-200": isActive,
+                  "text-gray-400": !isActive,
+                },
+              )}
+            >
+              {x.label}
+            </a>
+            <a
+              key={x.to}
+              href={x.to}
+              className={clsx(
+                "flex h-full flex-col items-center justify-center transition-all md:hidden",
+                {
+                  "text-gray-200": isActive,
+                  "text-gray-400": !isActive,
+                },
+              )}
+            >
+              {x.icon}
+              <span
+                className={clsx("text-sm transition-all", {
+                  "opacity-100": isActive,
+                  "opacity-0": !isActive,
+                })}
+              >
+                {x.label}
+              </span>
+            </a>
+          </React.Fragment>
+        );
+      })}
     </nav>
   );
 };
+
+export function useActiveNavItem(): string {
+  const [active, setActive] = React.useState("");
+  const allTitlesRef = React.useRef<Record<string, IntersectionObserverEntry>>(
+    {},
+  );
+
+  React.useEffect(() => {
+    const callback: IntersectionObserverCallback = (entries) => {
+      allTitlesRef.current = entries.reduce((acc, cur) => {
+        // eslint-disable-next-line no-param-reassign
+        acc[cur.target.id] = cur;
+        return acc;
+      }, allTitlesRef.current);
+
+      const visibleTitles: Element[] = [];
+      const keys = Object.keys(allTitlesRef.current);
+      keys.forEach((key) => {
+        const entry = allTitlesRef.current[key];
+        if (entry.isIntersecting) visibleTitles.push(entry.target);
+      });
+
+      if (visibleTitles.length === 1) {
+        setActive(visibleTitles[0].id);
+        // If there is more than one visible heading,
+        // choose the one that is closest to the top of the page
+      } else if (visibleTitles.length > 1) {
+        const sorted = [...visibleTitles].sort(
+          (a, b) =>
+            a.getBoundingClientRect().top - b.getBoundingClientRect().top,
+        );
+        const item = sorted[0];
+        setActive(item.id);
+      }
+    };
+    const observer = new IntersectionObserver(callback);
+    const titleElements = Array.from(
+      document.querySelectorAll("[data-section-id]"),
+    );
+    titleElements.forEach((x) => observer.observe(x));
+    return () => observer.disconnect();
+  }, []);
+  return active;
+}

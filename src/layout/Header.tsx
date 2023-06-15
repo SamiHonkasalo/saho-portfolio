@@ -17,7 +17,7 @@ export const Header = () => {
   return (
     <header
       className={clsx(
-        "sticky top-0 z-40 flex h-header w-full  text-gray-100 backdrop-blur-md transition-all",
+        "fixed top-0 z-40 flex h-header w-full  text-gray-100 backdrop-blur-md transition-all",
         { "bg-transparent/50 shadow-2xl": isScrolled },
       )}
     >
