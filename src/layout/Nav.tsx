@@ -14,7 +14,7 @@ export const Nav = () => {
   const activeItem = useActiveNavItem();
   const activeHash = `#${activeItem}`;
   const { hash } = window.location;
-  if (hash !== activeHash) window.history.pushState({}, "", activeHash);
+  if (hash !== activeHash) window.history.replaceState({}, "", activeHash);
 
   const navItems: NavItemType[] = React.useMemo(
     () => [
