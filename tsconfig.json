@@ -26,7 +26,7 @@
   },
   "include": [
     "src",
-    "tailwind.config.js",
+    "tailwind.config.cjs",
     "postcss.config.js",
     "prettier.config.cjs",
     "@types"
