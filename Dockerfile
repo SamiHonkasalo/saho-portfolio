@@ -9,7 +9,7 @@ COPY . ./
 RUN npm run build
 
 # Bundle static assets with nginx
-FROM nginx:stable-alpine3.18 as production
+FROM nginx:stable-alpine3.17 as production
 ENV NODE_ENV production
 # Copy built assets from builder
 COPY --from=builder /app/dist /usr/share/nginx/html
