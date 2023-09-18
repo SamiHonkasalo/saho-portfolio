@@ -1,6 +1,0 @@
-{
-  "extends": ["@sahodev/eslint-config-sahodev"],
-  "rules": {
-    // Modified rules here
-  }
-}

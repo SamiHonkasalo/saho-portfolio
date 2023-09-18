@@ -1,0 +1,43 @@
+---
+import About from "../components/About.astro";
+import Contact from "../components/Contact.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import MobileNav from "../components/MobileNav.astro";
+import Technologies from "../components/Technologies.astro";
+import logo from "../assets/logo.svg";
+
+interface Props {
+  title: string;
+  description: string;
+  lang: string;
+}
+
+const { title, lang, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href={logo.src} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="w-100 relative flex min-h-screen flex-col">
+    <Header />
+    <Hero />
+    <About />
+    <Technologies />
+    <Contact />
+    <MobileNav />
+  </body>
+</html>
+<style is:global>
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+</style>

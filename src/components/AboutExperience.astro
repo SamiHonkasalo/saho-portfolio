@@ -1,0 +1,52 @@
+---
+import { getLangFromUrl, useTranslation } from "../i18n/utils";
+import { AboutPageButtonIcons } from "../utils/config";
+import type { ExperienceItemProps } from "../utils/types";
+import AboutListItem from "./AboutListItem.astro";
+import Timespan from "./Timespan.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const { t } = useTranslation(lang);
+
+const experiences: ExperienceItemProps[] = [
+  {
+    title: t("experience.nodeon"),
+    company: "Nodeon Finland Oy",
+    from: { month: 1, year: 2021 },
+  },
+  {
+    title: t("experience.jamk"),
+    company: "JAMK",
+    from: { month: 8, year: 2019 },
+    to: { month: 7, year: 2022 },
+  },
+  {
+    title: t("experience.devecto"),
+    company: "Devecto Oy",
+    from: { month: 12, year: 2019 },
+    to: { month: 12, year: 2020 },
+  },
+  {
+    title: t("experience.previous"),
+    company: "",
+    from: { month: 9, year: 2017 },
+    to: { month: 12, year: 2019 },
+    disabled: true,
+  },
+];
+---
+
+<ul>
+  {
+    experiences.map((e) => (
+      <AboutListItem
+        icon={AboutPageButtonIcons.experience}
+        primary={e.title}
+        secondary={e.company}
+        disabled={e.disabled}
+      >
+        <Timespan from={e.from} to={e.to} slot="ternary" />
+      </AboutListItem>
+    ))
+  }
+</ul>

@@ -1,0 +1,17 @@
+---
+import { getLangFromUrl, useTranslation } from "../i18n/utils";
+import ContactItems from "./ContactItems.astro";
+
+import Title from "./Title.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const { t } = useTranslation(lang);
+---
+
+<div class="-mt-about bg-zinc-800 pb-80">
+  <div class="mt-about"></div>
+  <div class="mx-auto flex max-w-5xl flex-col items-center p-4">
+    <Title id="contact">{t("contact.page-title")}</Title>
+    <ContactItems />
+  </div>
+</div>

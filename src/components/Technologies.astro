@@ -1,0 +1,36 @@
+---
+import { getLangFromUrl, useTranslation } from "../i18n/utils";
+import TechnologiesCards from "./TechnologiesCards.astro";
+import Title from "./Title.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const { t } = useTranslation(lang);
+---
+
+<div class="technologies-section bg-slate-300">
+  <div class="mx-auto flex max-w-5xl flex-col items-center bg-slate-300 p-4">
+    <Title id="technologies">{t("technologies.page-title")}</Title>
+    <TechnologiesCards />
+  </div>
+</div>
+
+<style>
+  .technologies-section {
+    clip-path: ellipse(350% 100% at 50% 0%);
+  }
+  @media screen(sm) {
+    .technologies-section {
+      clip-path: ellipse(300% 100% at 50% 0%);
+    }
+  }
+  @media screen(md) {
+    .technologies-section {
+      clip-path: ellipse(250% 100% at 50% 0%);
+    }
+  }
+  @media screen(lg) {
+    .technologies-section {
+      clip-path: ellipse(200% 100% at 50% 0%);
+    }
+  }
+</style>

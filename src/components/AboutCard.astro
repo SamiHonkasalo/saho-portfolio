@@ -1,0 +1,63 @@
+---
+import { getLangFromUrl, useTranslation } from "../i18n/utils";
+import AboutContent from "./AboutContent.astro";
+import { AboutPageButtonIcons, AboutPageSectionKeys } from "../utils/config";
+
+const lang = getLangFromUrl(Astro.url);
+const { t } = useTranslation(lang);
+---
+
+<script>
+  const activeAttribute = "active";
+  const sectionAttribute = "data-about-section";
+
+  const handleClick = (key: string) => {
+    document.querySelectorAll(`[${sectionAttribute}]`).forEach((el) => {
+      if (el.getAttribute(sectionAttribute) === key) {
+        (el as HTMLElement).dataset[activeAttribute] = "true";
+      } else {
+        (el as HTMLElement).dataset[activeAttribute] = "false";
+      }
+    });
+  };
+
+  document.querySelectorAll(`[${sectionAttribute}]`).forEach((btn) => {
+    btn.addEventListener("click", (ev) => {
+      const target = ev.currentTarget as Element;
+      handleClick(target.getAttribute(sectionAttribute) ?? "");
+    });
+  });
+
+  handleClick("me");
+</script>
+
+<div class="w-full overflow-hidden">
+  <div
+    class="mt-16 flex w-full max-w-xs flex-row items-center justify-start gap-4"
+  >
+    {
+      AboutPageSectionKeys.map((s) => {
+        return (
+          <div class="flex flex-1 flex-col items-center justify-center p-1">
+            <button
+              data-about-section={s}
+              type="button"
+              aria-labelledby={`label-${s}`}
+              class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white text-zinc-800 shadow-xl transition-all hover:scale-125 data-[active=true]:scale-150 data-[active=true]:shadow-2xl"
+            >
+              <Fragment set:html={AboutPageButtonIcons[s]} />
+            </button>
+            <span
+              data-about-section={s}
+              id={`label-${s}`}
+              class="mt-3 text-lg font-normal data-[active=true]:font-bold"
+            >
+              {t(`about.${s}`)}
+            </span>
+          </div>
+        );
+      })
+    }
+  </div>
+  <AboutContent />
+</div>

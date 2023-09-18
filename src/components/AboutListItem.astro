@@ -1,0 +1,23 @@
+---
+type Props = {
+  icon: string;
+  primary: string;
+  secondary: string;
+  disabled: boolean | undefined;
+};
+
+const { icon, primary, secondary, disabled } = Astro.props;
+
+let listClass =
+  "my-4 flex items-center font-bold last:mb-0 [&>svg]:h-10 [&>svg]:w-10";
+if (disabled) listClass = `${listClass} text-gray-800/40`;
+---
+
+<li class={listClass}>
+  <Fragment set:html={icon} />
+  <div class="ml-4">
+    <h6>{primary}</h6>
+    <p class="font-semibold">{secondary}</p>
+    <p class="font-semibold"><slot name="ternary" /></p>
+  </div>
+</li>

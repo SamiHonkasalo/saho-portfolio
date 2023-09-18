@@ -1,0 +1,45 @@
+---
+import { getLangFromUrl, useTranslation } from "../i18n/utils";
+import Title from "./Title.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const { t } = useTranslation(lang);
+---
+
+<div
+  class="hero-image h-screen max-h-[1400px] min-h-[800px] bg-cover bg-fixed bg-center bg-no-repeat"
+>
+  <div class="mx-auto mt-header max-w-5xl p-4 pt-16">
+    <div
+      class="flex flex-col rounded-md bg-white/5 p-6 text-gray-200 mix-blend-normal shadow-md backdrop-blur-md md:flex-row"
+    >
+      <div
+        class="hero-avatar col-span-5 m-auto h-48 w-48 shrink-0 grow-0 rounded-full bg-slate-600/20 bg-[size:70%_90%] bg-bottom-center bg-no-repeat md:order-1"
+      >
+      </div>
+      <div
+        class="m-4 mt-4 flex flex-col items-center md:mr-2 md:mt-0 md:items-start"
+      >
+        <Title id="home" scrollMargin="999999px">
+          {t("hero.card-title")}
+        </Title>
+
+        <p
+          class="ml-1 whitespace-pre-line text-center text-lg font-normal md:text-start"
+        >
+          {t("hero.card-content")}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hero-image {
+    background-image: url("../assets/hero-image.webp");
+  }
+
+  .hero-avatar {
+    background-image: url("../assets/hero-avatar.webp");
+  }
+</style>

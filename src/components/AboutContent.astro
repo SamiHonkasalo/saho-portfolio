@@ -1,0 +1,34 @@
+---
+import { AboutPageSectionKeys } from "../utils/config";
+import AboutEducation from "./AboutEducation.astro";
+import AboutExperience from "./AboutExperience.astro";
+import AboutMe from "./AboutMe.astro";
+import { getLangFromUrl, useTranslation } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const { t } = useTranslation(lang);
+---
+
+<div
+  class="min-h-[700px] w-full rounded-lg bg-white p-8 pb-2 shadow-lg md:min-h-[500px] lg:min-h-[400px]"
+>
+  {
+    AboutPageSectionKeys.map((k) => (
+      <p
+        data-about-section={k}
+        class="mb-4 hidden text-lg font-bold data-[active=true]:block"
+      >
+        {t(`about.${k}`)}
+      </p>
+    ))
+  }
+  <div data-about-section="me" class="hidden data-[active=true]:block">
+    <AboutMe />
+  </div>
+  <div data-about-section="experience" class="hidden data-[active=true]:block">
+    <AboutExperience />
+  </div>
+  <div data-about-section="education" class="hidden data-[active=true]:block">
+    <AboutEducation />
+  </div>
+</div>

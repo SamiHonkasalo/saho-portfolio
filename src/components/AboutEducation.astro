@@ -1,0 +1,40 @@
+---
+import { getLangFromUrl, useTranslation } from "../i18n/utils";
+import { AboutPageButtonIcons } from "../utils/config";
+import type { EducationItemProps } from "../utils/types";
+import AboutListItem from "./AboutListItem.astro";
+import Timespan from "./Timespan.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const { t } = useTranslation(lang);
+
+const educations: EducationItemProps[] = [
+  {
+    title: t("education.it"),
+    school: "JAMK",
+    from: { month: 9, year: 2019 },
+    to: { month: 9, year: 2020 },
+  },
+  {
+    title: t("education.automation"),
+    school: "JAMK",
+    from: { month: 8, year: 2014 },
+    to: { month: 1, year: 2018 },
+  },
+];
+---
+
+<ul>
+  {
+    educations.map((e) => (
+      <AboutListItem
+        icon={AboutPageButtonIcons.experience}
+        primary={e.title}
+        secondary={e.school}
+        disabled={false}
+      >
+        <Timespan from={e.from} to={e.to} slot="ternary" />
+      </AboutListItem>
+    ))
+  }
+</ul>

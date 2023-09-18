@@ -1,0 +1,10 @@
+---
+import { getLangFromUrl, useTranslation } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const { t } = useTranslation(lang);
+---
+
+<p class="whitespace-pre-line font-semibold text-zinc-800">
+  {t("about.me-text")}
+</p>

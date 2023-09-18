@@ -1,0 +1,45 @@
+---
+import { defaultLang } from "../i18n/ui";
+import { getLangFromUrl } from "../i18n/utils";
+import Nav from "./Nav.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const nextLng = lang === "en" ? "fi" : "en";
+const href = nextLng === defaultLang ? "" : nextLng;
+---
+
+<script>
+  const classes = ["bg-transparent/50", "shadow-2xl"];
+  const listener = () => {
+    const distance = window.scrollY;
+    const header = document.querySelector("header");
+    if (!header) return;
+    if (distance > 50) {
+      header.classList.add(...classes);
+    } else {
+      header.classList.remove(...classes);
+    }
+  };
+  document.addEventListener("scroll", listener);
+  listener();
+</script>
+
+<header
+  class="fixed top-0 z-40 flex h-header w-full text-gray-100 backdrop-blur-md transition-all"
+>
+  <div
+    class="mx-auto flex h-full w-full max-w-5xl items-center justify-center px-4"
+  >
+    <h1 class="mr-2 w-min text-2xl font-bold">Sami Honkasalo</h1>
+
+    <div class="hidden h-full md:block">
+      <Nav />
+    </div>
+    <a
+      href={`/${href}`}
+      class="ml-auto flex h-full w-min items-center justify-center rounded-lg px-8 font-bold uppercase text-gray-200 hover:bg-transparent/5"
+    >
+      {nextLng}
+    </a>
+  </div>
+</header>

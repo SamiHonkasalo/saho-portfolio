@@ -1,0 +1,38 @@
+---
+import { getLangFromUrl, useTranslation } from "../i18n/utils";
+import AboutCard from "./AboutCard.astro";
+import Title from "./Title.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const { t } = useTranslation(lang);
+---
+
+<div class="about-section clip-path-about col-span-full -mt-about bg-slate-300">
+  <div class="h-about w-full"></div>
+  <div class="mx-auto flex max-w-5xl flex-col items-center p-4">
+    <Title id="about">{t("about.page-title")}</Title>
+    <AboutCard />
+  </div>
+  <hr class="mx-auto my-40 h-0.5 w-4/5 border-0 bg-slate-400" />
+</div>
+
+<style>
+  .about-section {
+    clip-path: ellipse(350% 100% at 50% 100%);
+  }
+  @media screen(sm) {
+    .about-section {
+      clip-path: ellipse(300% 100% at 50% 100%);
+    }
+  }
+  @media screen(md) {
+    .about-section {
+      clip-path: ellipse(250% 100% at 50% 100%);
+    }
+  }
+  @media screen(lg) {
+    .about-section {
+      clip-path: ellipse(200% 100% at 50% 100%);
+    }
+  }
+</style>

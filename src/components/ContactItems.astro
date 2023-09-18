@@ -1,0 +1,49 @@
+---
+import { getLangFromUrl, useTranslation } from "../i18n/utils";
+import emailIcon from "../assets/email-icon.svg?raw";
+import githubIcon from "../assets/github-icon.svg?raw";
+import linkedinIcon from "../assets/linkedin-icon.svg?raw";
+import type { ContactType } from "../utils/types";
+
+const lang = getLangFromUrl(Astro.url);
+const { t } = useTranslation(lang);
+
+const contacts: ContactType[] = [
+  {
+    text: t("contact.email"),
+    to: "mailto:honkasalo.sami@gmail.com",
+    icon: emailIcon,
+  },
+  {
+    text: "GitHub",
+    to: "https://github.com/SamiHonkasalo",
+    icon: githubIcon,
+  },
+  {
+    text: "LinkedIn",
+    to: "https://www.linkedin.com/in/sami-honkasalo/",
+    icon: linkedinIcon,
+  },
+];
+---
+
+<div
+  class="mt-8 grid grid-cols-1 items-center justify-center gap-3 md:grid-cols-3"
+>
+  {
+    contacts.map((c) => {
+      const { icon, text, to } = c;
+      return (
+        <a
+          href={to}
+          rel="noopener noreferrer"
+          target="_blank"
+          class="flex items-center justify-center rounded-lg bg-white px-12 py-3 text-2xl font-bold text-zinc-800 shadow-xl"
+        >
+          <Fragment set:html={icon} />
+          {text}
+        </a>
+      );
+    })
+  }
+</div>

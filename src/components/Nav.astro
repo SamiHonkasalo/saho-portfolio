@@ -1,0 +1,118 @@
+---
+import { getLangFromUrl, useTranslation } from "../i18n/utils";
+import homeIcon from "../assets/home-icon.svg?raw";
+import aboutIcon from "../assets/about-icon.svg?raw";
+import technologiesIcon from "../assets/technologies-icon.svg?raw";
+import contactIcon from "../assets/contact-icon.svg?raw";
+
+type NavItemType = {
+  label: string;
+  to: string;
+  icon: string;
+};
+
+const lang = getLangFromUrl(Astro.url);
+const { t } = useTranslation(lang);
+
+const navItems: NavItemType[] = [
+  {
+    label: t("nav.home"),
+    to: "#home",
+    icon: homeIcon,
+  },
+  {
+    label: t("nav.about"),
+    to: "#about",
+    icon: aboutIcon,
+  },
+  {
+    label: t("nav.technologies"),
+    to: "#technologies",
+    icon: technologiesIcon,
+  },
+  {
+    label: t("nav.contact"),
+    to: "#contact",
+    icon: contactIcon,
+  },
+];
+---
+
+<script>
+  let allTitles: Record<string, IntersectionObserverEntry> = {};
+
+  const callback: IntersectionObserverCallback = (entries) => {
+    let active = "";
+    allTitles = entries.reduce((acc, cur) => {
+      // eslint-disable-next-line no-param-reassign
+      acc[cur.target.id] = cur;
+      return acc;
+    }, allTitles);
+
+    const visibleTitles: Element[] = [];
+    const keys = Object.keys(allTitles);
+    keys.forEach((key) => {
+      const entry = allTitles[key] as IntersectionObserverEntry;
+      if (entry.isIntersecting) visibleTitles.push(entry.target);
+    });
+
+    if (visibleTitles.length === 1) {
+      active = (visibleTitles[0] as Element).id;
+      // If there is more than one visible heading,
+      // choose the one that is closest to the top of the page
+    } else if (visibleTitles.length > 1) {
+      const sorted = [...visibleTitles].sort(
+        (a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top,
+      );
+      const item = sorted[0];
+      active = (item as Element).id;
+    }
+    if (active === "") {
+      return;
+    }
+    const activeHash = `#${active}`;
+    if (activeHash !== window.location.hash) {
+      window.history.replaceState({}, "", activeHash);
+    }
+    document.querySelectorAll("[data-nav-link]").forEach((el) => {
+      const isActive = el.getAttribute("data-nav-link") === activeHash;
+      (el as HTMLElement).dataset.active = String(isActive);
+    });
+  };
+  const observer = new IntersectionObserver(callback);
+  const titleElements = Array.from(
+    document.querySelectorAll("[data-section-id]"),
+  );
+  titleElements.forEach((x) => observer.observe(x));
+</script>
+
+<nav class="grid h-full grid-flow-col">
+  {
+    navItems.map((x) => {
+      return (
+        <>
+          <a
+            data-nav-link={x.to}
+            href={x.to}
+            class="hidden h-full items-center justify-center rounded-lg px-4 font-bold  text-gray-400 transition-all hover:bg-transparent/5 data-[active=true]:text-gray-200 md:flex"
+          >
+            {x.label}
+          </a>
+          <a
+            data-nav-link={x.to}
+            href={x.to}
+            class="flex h-full flex-col items-center justify-center text-gray-400 transition-all data-[active=true]:text-gray-200 md:hidden"
+          >
+            <Fragment set:html={x.icon} />
+            <span
+              data-nav-link={x.to}
+              class="text-sm opacity-0 transition-all data-[active=true]:opacity-100"
+            >
+              {x.label}
+            </span>
+          </a>
+        </>
+      );
+    })
+  }
+</nav>

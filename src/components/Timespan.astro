@@ -1,0 +1,18 @@
+---
+import type { MonthYear } from "../utils/types";
+type Props = {
+  from: MonthYear;
+  to: MonthYear | undefined;
+};
+
+const { from, to } = Astro.props;
+---
+
+<span class="mr-2">{`${from.month}/${from.year}`}</span>
+<span>
+  {
+    to
+      ? `${String.fromCharCode(8211)} ${to.month}/${to.year}`
+      : String.fromCharCode(8594)
+  }
+</span>
