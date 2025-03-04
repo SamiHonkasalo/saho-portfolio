@@ -7,25 +7,25 @@ const { t } = useTranslation(lang);
 ---
 
 <div
-  class="hero-image min-h-[max(800px,_100vh)] max-h-[1400px] bg-cover bg-fixed bg-center bg-no-repeat"
+  class="hero-image max-h-[1400px] min-h-[max(800px,_100vh)] bg-cover bg-fixed bg-center bg-no-repeat"
 >
-  <div class="mx-auto mt-header max-w-5xl p-4 pt-16">
+  <div class="mt-header mx-auto max-w-5xl p-4 pt-16">
     <div
-      class="flex mb-about flex-col rounded-md bg-white/5 p-6 text-gray-200 mix-blend-normal shadow-md backdrop-blur-md md:flex-row"
+      class="mb-about flex flex-col rounded-md bg-white/5 p-6 text-gray-200 mix-blend-normal shadow-md backdrop-blur-md md:flex-row"
     >
       <div
         class="hero-avatar col-span-5 m-auto h-48 w-48 shrink-0 grow-0 rounded-full bg-slate-600/20 bg-[size:70%_90%] bg-[bottom_center] bg-no-repeat md:order-1"
       >
       </div>
       <div
-        class="m-4 mt-4 flex flex-col items-center md:mr-2 md:mt-0 md:items-start"
+        class="m-4 mt-4 flex flex-col items-center md:mt-0 md:mr-2 md:items-start"
       >
         <Title id="home" scrollMargin="999999px">
           {t("hero.card-title")}
         </Title>
 
         <p
-          class="ml-1 whitespace-pre-line text-center text-lg font-normal md:text-start"
+          class="ml-1 text-center text-lg font-normal whitespace-pre-line md:text-start"
         >
           {t("hero.card-content")}
         </p>

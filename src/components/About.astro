@@ -7,7 +7,7 @@ const lang = getLangFromUrl(Astro.url);
 const { t } = useTranslation(lang);
 ---
 
-<div class="about-section clip-path-about col-span-full -mt-about bg-slate-300">
+<div class="about-section clip-path-about -mt-about col-span-full bg-slate-300">
   <div class="h-about w-full"></div>
   <div class="mx-auto flex max-w-5xl flex-col items-center p-4">
     <Title id="about">{t("about.page-title")}</Title>
