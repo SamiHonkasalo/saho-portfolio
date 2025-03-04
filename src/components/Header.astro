@@ -9,7 +9,7 @@ const href = nextLng === defaultLang ? "" : nextLng;
 ---
 
 <script>
-  const classes = ["bg-transparent/50", "shadow-2xl"];
+  const classes = ["bg-black/50", "shadow-2xl"];
   const listener = () => {
     const distance = window.scrollY;
     const header = document.querySelector("header");
@@ -25,7 +25,7 @@ const href = nextLng === defaultLang ? "" : nextLng;
 </script>
 
 <header
-  class="fixed top-0 z-40 flex h-header w-full text-gray-100 backdrop-blur-md transition-all"
+  class="h-header fixed top-0 z-40 flex w-full text-gray-100 backdrop-blur-md transition-all"
 >
   <div
     class="mx-auto flex h-full w-full max-w-5xl items-center justify-center px-4"
@@ -36,7 +36,7 @@ const href = nextLng === defaultLang ? "" : nextLng;
     </div>
     <a
       href={`/${href}`}
-      class="ml-auto flex h-full w-min items-center justify-center rounded-lg px-8 font-bold uppercase text-gray-200 hover:bg-transparent/5"
+      class="ml-auto flex h-full w-min items-center justify-center rounded-lg px-8 font-bold text-gray-200 uppercase hover:bg-black/5"
     >
       {nextLng}
     </a>

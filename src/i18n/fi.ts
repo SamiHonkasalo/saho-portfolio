@@ -9,14 +9,14 @@ export const fi: typeof en = {
   "nav.contact": "Yhteystiedot",
   "hero.card-title": "Ketterää Fullstack-Kehitystä",
   "hero.card-content":
-    "Kahdella insinööritutkinnolla varustettu ohjelmistokehittäjä.\n\nKeskityn tällä hetkellä töissä ja vapaa-ajallani fullstack-sovellusten ja -palveluiden suunnitteluun, kehitykseen ja testaukseen.",
+    "Kahdella insinööritutkinnolla varustettu vanhempi ohjelmistokehittäjä.\n\nKeskityn tällä hetkellä töissä ja vapaa-ajallani fullstack-sovellusten ja -palveluiden suunnitteluun, kehitykseen ja testaukseen.",
   "about.page-title": "Perusjutut",
   "about.me": "Mie",
   "about.experience": "Työ",
   "about.education": "Koulutus",
   "about.me-text":
-    "Ennen ohjelmistokehitykseen siirtymistä työskentelin automaatioinsinöörinä laajoissa kansainvälisissä projekteissa, jota kautta tutustuin läheisesti ohjelmistokehitykseen ja innostuin koodauksesta. Tämä innostus johti lopulta toiseen tutkintooni ja uudelle uralle siirtymiseen.\n\nOhjelmistokehittäjänä olen erityisen innostunut laadukkaan ja hyvin testatun koodin tuottamisesta. Alempana näkyvät teknologiat ovat käytännössä päivittäisessä käytössä, ja niiden lisäksi keskityn tällä hetkellä esimerkiksi sovellusarkkitehtuuriin, komponenttikirjastojen kehitykseen, UI/UX-suunnitteluun, sekä E2E-testauskirjastoihin.",
-  "experience.nodeon": "Ohjelmistokehittäjä",
+    "Kehittäjänä keskityn laadukkaiden, skaalautuvien ja hyvin testattujen ratkaisujen tuottamiseen. Työskentelen päivittäin alla listattujen teknologioiden parissa ja olen erityisen kiinnostunut ohjelmistoarkkitehtuurista, sekä uusien teknologioiden tutkimisesta.\n\nVapaa-aikaani vietän teknologiatouhujen ja pelaamisen ohella yleensä luonnon läheisyydessä \u2014 retkeillen, pyöräillen tai hiihtäen.",
+  "experience.nodeon": "Vanhempi ohjelmistokehittäjä",
   "experience.jamk": "Sivutoiminen Tuntiopettaja",
   "experience.devecto": "Ohjelmistokehittäjä",
   "experience.previous": "Automaatioinsinööri",

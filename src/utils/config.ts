@@ -17,7 +17,7 @@ export type AboutPageSection = Record<AboutPageSectionKey, { order: number }>;
 
 export type TechnologyType = {
   name: string;
-  icon: JSX.Element;
+  icon: string;
 };
 
 export const AboutPageButtonIcons: Record<AboutPageSectionKey, string> = {

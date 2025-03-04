@@ -7,7 +7,7 @@ const lang = getLangFromUrl(Astro.url);
 const { t } = useTranslation(lang);
 ---
 
-<div class="about-section clip-path-about col-span-full -mt-about bg-slate-300">
+<div class="about-section clip-path-about -mt-about col-span-full bg-slate-300">
   <div class="h-about w-full"></div>
   <div class="mx-auto flex max-w-5xl flex-col items-center p-4">
     <Title id="about">{t("about.page-title")}</Title>
@@ -20,17 +20,17 @@ const { t } = useTranslation(lang);
   .about-section {
     clip-path: ellipse(350% 100% at 50% 100%);
   }
-  @media screen(sm) {
+  @media (width >= theme(screens.sm)) {
     .about-section {
       clip-path: ellipse(300% 100% at 50% 100%);
     }
   }
-  @media screen(md) {
+  @media (width >= theme(screens.md)) {
     .about-section {
       clip-path: ellipse(250% 100% at 50% 100%);
     }
   }
-  @media screen(lg) {
+  @media (width >= theme(screens.lg)) {
     .about-section {
       clip-path: ellipse(200% 100% at 50% 100%);
     }
