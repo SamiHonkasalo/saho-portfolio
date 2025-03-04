@@ -20,17 +20,17 @@ const { t } = useTranslation(lang);
   .about-section {
     clip-path: ellipse(350% 100% at 50% 100%);
   }
-  @media screen(sm) {
+  @media (width >= theme(screens.sm)) {
     .about-section {
       clip-path: ellipse(300% 100% at 50% 100%);
     }
   }
-  @media screen(md) {
+  @media (width >= theme(screens.md)) {
     .about-section {
       clip-path: ellipse(250% 100% at 50% 100%);
     }
   }
-  @media screen(lg) {
+  @media (width >= theme(screens.lg)) {
     .about-section {
       clip-path: ellipse(200% 100% at 50% 100%);
     }
