@@ -6,7 +6,7 @@ import Hero from "../components/Hero.astro";
 import MobileNav from "../components/MobileNav.astro";
 import Technologies from "../components/Technologies.astro";
 import logo from "../assets/logo.svg";
-import "./src/styles/global.css";
+import "../styles/global.css";
 
 interface Props {
   title: string;
@@ -28,7 +28,7 @@ const { title, lang, description } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body class="relative flex min-h-screen w-100 flex-col">
+  <body class="relative flex min-h-screen w-full flex-col">
     <Header />
     <Hero />
     <About />
