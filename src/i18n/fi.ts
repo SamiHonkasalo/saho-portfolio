@@ -9,7 +9,7 @@ export const fi: typeof en = {
   "nav.contact": "Yhteystiedot",
   "hero.card-title": "Ketterää Fullstack-Kehitystä",
   "hero.card-content":
-    "Kahdella insinööritutkinnolla varustettu vanhempi ohjelmistokehittäjä.\n\nKeskityn tällä hetkellä töissä ja vapaa-ajallani fullstack-sovellusten ja -palveluiden suunnitteluun, kehitykseen ja testaukseen.",
+    "Ylemmällä insinööritutkinnolla varustettu vanhempi ohjelmistokehittäjä.\n\nKeskityn tällä hetkellä töissä ja vapaa-ajallani fullstack-sovellusten ja -palveluiden suunnitteluun, kehitykseen ja testaukseen.",
   "about.page-title": "Perusjutut",
   "about.me": "Mie",
   "about.experience": "Työ",
@@ -20,6 +20,7 @@ export const fi: typeof en = {
   "experience.jamk": "Sivutoiminen Tuntiopettaja",
   "experience.devecto": "Ohjelmistokehittäjä",
   "experience.previous": "Automaatioinsinööri",
+  "education.it-masters": "Tieto- ja viestintätekniikan insinööri (YAMK)",
   "education.it": "Tieto- ja viestintätekniikan insinööri",
   "education.automation": "Automaatiotekniikan insinööri",
   "technologies.page-title": "Teknologiat",

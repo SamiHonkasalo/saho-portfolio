@@ -7,7 +7,7 @@ export const en = {
   "nav.contact": "Contact",
   "hero.card-title": "Agile Fullstack Development",
   "hero.card-content":
-    "Senior software developer equipped with two bachelor's degrees.\n\nAt the moment my main focus on professional and personal projects is to design, develop and test fullstack applications and services",
+    "Senior software developer equipped with a master's degree and two bachelor's degrees.\n\nAt the moment my main focus on professional and personal projects is to design, develop and test fullstack applications and services",
   "about.page-title": "Basics",
   "about.me": "Me",
   "about.experience": "Work",
@@ -18,6 +18,7 @@ export const en = {
   "experience.jamk": "Visiting Lecturer",
   "experience.devecto": "Software Developer",
   "experience.previous": "Automation Engineer",
+  "education.it-masters": "Master of Engineering in Information Technology",
   "education.it": "Bachelor of Engineering in Information Technology",
   "education.automation": "Bachelor of Engineering in Automation Engineering",
   "technologies.page-title": "Technologies",
